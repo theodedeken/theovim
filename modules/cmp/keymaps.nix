@@ -11,9 +11,10 @@
           ["<c-d>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
 
           ["<C-e>"] = cmp.mapping({ i = cmp.mapping.abort(), c = cmp.mapping.close() }),
-
-          ["<C-cr>"] = cmp.mapping.confirm ( { select = true } ),
-
+          -- Confirm on tab also if nothing is selected
+          ["<Tab>"] = cmp.mapping.confirm ( { select = true } ),
+          -- Confirm on enter if something is selected
+          ["<CR>"] = cmp.mapping.confirm ( { select = false }),
           ["<C-l>"] = cmp.mapping(function(fallback)
             local luasnip = require("luasnip")
             if luasnip.expand_or_locally_jumpable() then

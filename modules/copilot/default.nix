@@ -1,7 +1,7 @@
 { lib, ... }:
 {
   plugins.copilot-lua = {
-    enable = true;
+    enable = false;
     settings = {
       filetypes.markdown = true;
       suggestion = {

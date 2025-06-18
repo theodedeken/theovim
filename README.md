@@ -1,7 +1,6 @@
 <p align="center" style="color:grey">
 
 ![image](https://github.com/niksingh710/nvix/assets/60490474/89503d51-ca86-4933-872f-3f60c32202a9)
-
 <div align="center">
 <table>
 <tbody>

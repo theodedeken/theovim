@@ -1,7 +1,15 @@
-{ inputs, self, ... }:
+{
+  inputs,
+  self,
+  ...
+}:
 {
   perSystem =
-    { pkgs, system, ... }:
+    {
+      pkgs,
+      system,
+      ...
+    }:
     let
       inherit (inputs) nixvim;
       extraSpecialArgs = {

@@ -8,7 +8,7 @@
         packages.enable = false;
         footer = [
           ""
-          "From niksingh710"
+          "By theodedeken with lots of help from niksingh710"
           ""
         ];
         mru.limit = 5;

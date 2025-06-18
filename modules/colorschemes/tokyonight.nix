@@ -3,7 +3,7 @@
   colorschemes.tokyonight = {
     enable = true;
     settings = {
-      style = "night";
+      style = "storm";
       transparent = config.nvix.transparent;
       styles = {
         floats = if config.nvix.transparent then "transparent" else "dark";
