@@ -1,4 +1,9 @@
-{ helpers, lib, ... }:
+{
+  pkgs,
+  helpers,
+  lib,
+  ...
+}:
 {
   # Generalise for all colorschemes
   # <https://github.com/folke/snacks.nvim/discussions/1306#discussioncomment-12266647>
@@ -84,6 +89,7 @@
           sources.explorer = {
             actions.toggle_preview =
               helpers.mkRaw # lua
+
                 ''
                   function(picker) --[[Override]]
                     picker.preview.win:toggle()
@@ -115,6 +121,7 @@
             );
             on_show =
               helpers.mkRaw # lua
+
                 ''
                   function(picker)
                     local show = false
@@ -158,6 +165,7 @@
                 '';
             on_close =
               helpers.mkRaw # lua
+
                 ''
                   function(picker)
                     picker.preview.win:close()
@@ -185,7 +193,9 @@
       event = [ "VimEnter" ];
       callback =
         helpers.mkRaw # lua
+
           ''
+            -- Smuggling in ${pkgs.lazygit}
             -- Taken from https://github.com/folke/snacks.nvim?tab=readme-ov-file#-usage
             function()
               -- Setup some globals for debugging (lazy-loaded)

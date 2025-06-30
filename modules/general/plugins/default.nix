@@ -3,9 +3,8 @@
   config,
   lib,
   ...
-}:
-{
-  extraPlugins = with pkgs.vimPlugins; [ stay-centered-nvim ];
+}: {
+  extraPlugins = with pkgs.vimPlugins; [stay-centered-nvim];
   plugins = {
     # Must have plugins to have a decent flow of work
     tmux-navigator.enable = true;
@@ -20,12 +19,12 @@
       enable = true;
       mockDevIcons = true;
       modules = {
-        ai = { };
-        icons = { };
-        pairs = { };
-        surround = { };
-        operators = { };
-        bufremove = { };
+        ai = {};
+        icons = {};
+        pairs = {};
+        surround = {};
+        operators = {};
+        bufremove = {};
       };
     };
     which-key = {
@@ -38,9 +37,8 @@
     timeout = true;
     timeoutlen = 250;
   };
-  imports =
-    with builtins;
-    with lib;
+  imports = with builtins;
+  with lib;
     map (fn: ./${fn}) (
       filter (fn: (fn != "default.nix" && !hasSuffix ".md" "${fn}")) (attrNames (readDir ./.))
     );

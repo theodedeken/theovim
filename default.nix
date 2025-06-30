@@ -7,6 +7,7 @@
   perSystem =
     {
       pkgs,
+      config,
       system,
       ...
     }:
@@ -44,6 +45,9 @@
         };
     in
     {
+      overlayAttrs = {
+        theovim = config.packages.default;
+      };
       # Run `nix flake check .` to verify that your config is not broken
       checks = rec {
         default = check (nvix "core") "Checks if core builds fine.";
