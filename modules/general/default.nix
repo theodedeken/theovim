@@ -3,11 +3,9 @@
   helpers,
   lib,
   ...
-}:
-let
+}: let
   inherit (config.nvix) icons;
-in
-{
+in {
   luaLoader.enable = false;
   dependencies = {
     gcc.enable = true;
@@ -19,7 +17,6 @@ in
   };
 
   opts = {
-
     clipboard = "unnamedplus";
     cursorline = true;
     cursorlineopt = "number";
@@ -60,6 +57,7 @@ in
     fileencoding = "utf-8";
     list = true;
     smoothscroll = true;
+    scrolloff = 8;
     autoread = true;
     fillchars = {
       eob = " ";
@@ -71,21 +69,21 @@ in
   autoCmd = [
     {
       desc = "Highlight on yank";
-      event = [ "TextYankPost" ];
+      event = ["TextYankPost"];
       callback =
         helpers.mkRaw # lua
-          ''
-            function()
-              vim.highlight.on_yank()
-            end
-          '';
+        
+        ''
+          function()
+            vim.highlight.on_yank()
+          end
+        '';
     }
   ];
 
-  extraLuaPackages = lp: with lp; [ luarocks ];
-  extraConfigLua =
-    with icons.diagnostics;
-    # lua
+  extraLuaPackages = lp: with lp; [luarocks];
+  extraConfigLua = with icons.diagnostics;
+  # lua
     ''
       vim.opt.whichwrap:append("<>[]hl")
       vim.opt.listchars:append("space:·")
@@ -103,9 +101,8 @@ in
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
       end
     '';
-  imports =
-    with builtins;
-    with lib;
+  imports = with builtins;
+  with lib;
     map (fn: ./${fn}) (
       filter (fn: (fn != "default.nix" && !hasSuffix ".md" "${fn}")) (attrNames (readDir ./.))
     );

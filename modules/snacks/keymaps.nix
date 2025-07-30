@@ -1,8 +1,10 @@
-{ config, helpers, ... }:
-let
-  inherit (config.nvix.mkKey) mkKeymap wKeyObj;
-in
 {
+  config,
+  helpers,
+  ...
+}: let
+  inherit (config.nvix.mkKey) mkKeymap wKeyObj;
+in {
   wKeyList = [
     (wKeyObj [
       "<leader>."
@@ -44,18 +46,22 @@ in
     (mkKeymap "n" "<leader>sP" "<cmd>:lua Snacks.picker()<cr>" "Pickers")
     (mkKeymap "n" "<leader>ss" "<cmd>:lua Snacks.picker.smart()<cr>" "Smart")
     (mkKeymap "n" "<leader>st" "<cmd>:lua Snacks.picker.todo_comments({layout = 'ivy'})<cr>" "Todo")
-    (mkKeymap "n" "<leader>sT"
+    (
+      mkKeymap "n" "<leader>sT"
       ''<cmd>:lua Snacks.picker.todo_comments({keywords = {"TODO", "FIX", "FIXME"}, layout = 'ivy'})<cr>''
       "Todo"
     )
-    (mkKeymap "n" "<leader>s:" ''<cmd>:lua Snacks.picker.command_history({ layout = 'ivy'})<cr>''
+    (
+      mkKeymap "n" "<leader>s:" ''<cmd>:lua Snacks.picker.command_history({ layout = 'ivy'})<cr>''
       "Command History"
     )
     (mkKeymap "n" "<leader>s," "<cmd>:lua Snacks.picker.buffers({layout = 'vscode'})<cr>" "Buffers")
     (mkKeymap "n" "<leader>sh" ''<cmd>:lua Snacks.picker.help()<cr>'' "Help Pages")
     (mkKeymap "n" "<leader>sk" ''<cmd>:lua Snacks.picker.keymaps()<cr>'' "Keymaps")
 
-    (mkKeymap "n" "<leader>su" (helpers.mkRaw # lua
+    (mkKeymap "n" "<leader>su" (
+      helpers.mkRaw # lua
+      
       ''
         function()
           Snacks.picker.undo({
@@ -77,6 +83,6 @@ in
     (mkKeymap "n" "<leader>f/" "<cmd>:lua Snacks.picker.grep()<cr>" "Grep")
     (mkKeymap "n" "<leader>fr" "<cmd>:lua Snacks.picker.recent()<cr>" "Recent")
     (mkKeymap "n" "<leader>fp" "<cmd>:lua Snacks.picker.projects()<cr>" "Pickers")
+    (mkKeymap "n" "<leader>f." "<cmd>:lua Snacks.picker.resume()<cr>" "Resume previous pick")
   ];
-
 }

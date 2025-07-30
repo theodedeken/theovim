@@ -1,6 +1,6 @@
-{ self, ... }:
-{
+{self, ...}: {
   imports = [
+    ../plugins/vim-coach.nix
     ./bare.nix
     self.nvixModules.git
     self.nvixModules.lsp # Initializes LSP

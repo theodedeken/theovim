@@ -4,8 +4,9 @@
   lib,
   ...
 }: {
-  extraPlugins = with pkgs.vimPlugins; [stay-centered-nvim];
   plugins = {
+    # For learning
+    vim-coach.enable = true;
     # Must have plugins to have a decent flow of work
     tmux-navigator.enable = true;
     smart-splits.enable = true;

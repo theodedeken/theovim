@@ -1,9 +1,11 @@
-{ config, helpers, ... }:
-let
+{
+  config,
+  helpers,
+  ...
+}: let
   inherit (config.nvix.mkKey) mkKeymap mkKeymapWithOpts wKeyObj;
   # Set of General mappings not dependent on any plugins
   v = [
-
     (mkKeymap "v" "<c-s>" "<esc>:w<cr>" "Saving File")
     (mkKeymap "v" "<c-c>" "<esc>" "Escape")
 
@@ -23,11 +25,6 @@ let
     (mkKeymapWithOpts "x" "k" ''v:count || mode(1)[0:1] == "no" ? "k" : "gk"'' "Move up" {
       expr = true;
     })
-    (mkKeymap "n" "<leader>st" (helpers.mkRaw # lua
-      ''
-        require('stay-centered').toggle
-      ''
-    ) "Toggle stay-centered.nvim")
   ];
 
   insert = [
@@ -54,14 +51,9 @@ let
     (mkKeymap "n" "<leader>|" "<cmd>vsplit<cr>" "vertical split")
     (mkKeymap "n" "<leader>-" "<cmd>split<cr>" "horizontal split")
 
-    (mkKeymap "n" "n" "nzzzv" "Move to center")
-    (mkKeymap "n" "N" "Nzzzv" "Moving to center")
-    (mkKeymap "n" "<leader>sC" (helpers.mkRaw # lua
-      ''
-        require('stay-centered').toggle
-      ''
-    ) "Toggle stay-centered.nvim")
-    (mkKeymap "n" "<leader>ft" (helpers.mkRaw # lua
+    (mkKeymap "n" "<leader>ft" (
+      helpers.mkRaw # lua
+      
       ''
         function()
           vim.ui.input({ prompt = "Enter FileType: " }, function(input)
@@ -75,7 +67,9 @@ let
       ''
     ) "Set Filetype")
 
-    (mkKeymap "n" "<leader>o" (helpers.mkRaw # lua
+    (mkKeymap "n" "<leader>o" (
+      helpers.mkRaw # lua
+      
       ''
 
         function()
@@ -120,10 +114,8 @@ let
     (mkKeymapWithOpts "n" "k" ''v:count || mode(1)[0:1] == "no" ? "k" : "gk"'' "Move up" {
       expr = true;
     })
-
   ];
-in
-{
+in {
   keymaps = insert ++ normal ++ v ++ xv;
 
   # This is list to present icon on which key
@@ -182,7 +174,8 @@ in
     ])
   ];
 
-  extraConfigLua = # lua
+  extraConfigLua =
+    # lua
     ''
 
       -- Use black hole register for 'x', 'X', 'c', 'C'
