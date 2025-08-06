@@ -5,7 +5,6 @@
   ...
 }: {
   # Overlays
-  # TODO: add overlay for snacks
   nixpkgs.overlays = [
     (final: prev: {
       vimPlugins =

@@ -4,6 +4,21 @@
   lib,
   ...
 }: {
+  nixpkgs.overlays = [
+    (final: prev: {
+      vimPlugins =
+        prev.vimPlugins
+        // {
+          # FIXME: remove once vim coach is packaged in nix
+          vim-coach = pkgs.callPackage ../../../plugins/vim-coach-package.nix {
+            inherit
+              (pkgs.vimUtils)
+              buildVimPlugin
+              ;
+          };
+        };
+    })
+  ];
   plugins = {
     # For learning
     vim-coach.enable = true;
@@ -40,7 +55,9 @@
   };
   imports = with builtins;
   with lib;
-    map (fn: ./${fn}) (
+    (map (fn: ./${fn}) (
       filter (fn: (fn != "default.nix" && !hasSuffix ".md" "${fn}")) (attrNames (readDir ./.))
-    );
+    ))
+    # FIXME: remove once vim coach is packaged in nixvim
+    ++ [../../../plugins/vim-coach.nix];
 }

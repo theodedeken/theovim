@@ -1,9 +1,4 @@
-{
-  inputs,
-  pkgs,
-  lib,
-  ...
-}: let
+{inputs, ...}: let
   inherit (inputs.nixvim.lib.nixvim.plugins) mkNeovimPlugin;
 in
   mkNeovimPlugin {
@@ -12,14 +7,4 @@ in
     maintainers = [];
     url = "https://github.com/shahshlok/vim-coach.nvim";
     description = "Your Personal Coach for Neovim";
-  }
-  // {
-    config = {
-      plugins.vim-coach.package = pkgs.callPackage ./vim-coach-package.nix {
-        inherit
-          (pkgs.vimUtils)
-          buildVimPlugin
-          ;
-      };
-    };
   }
