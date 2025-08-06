@@ -1,10 +1,10 @@
-{ helpers, ... }:
-{
+{helpers, ...}: {
   plugins = {
     nvim-ufo = {
       enable = true;
       settings = {
-        provider_selector = # lua
+        provider_selector =
+          # lua
           ''
             function()
               return { "lsp", "indent" }
@@ -24,7 +24,6 @@
           "text"
           "dashboard"
           "markdown"
-          "neo-tree"
         ];
         relculright = true;
         segments = [
@@ -37,7 +36,9 @@
           {
             click = "v:lua.ScLa";
             text = [
-              (helpers.mkRaw # lua
+              (
+                helpers.mkRaw # lua
+                
                 "require('statuscol.builtin').lnumfunc"
               )
               " "
@@ -46,7 +47,9 @@
           {
             click = "v:lua.ScFa";
             text = [
-              (helpers.mkRaw # lua
+              (
+                helpers.mkRaw # lua
+                
                 "require('statuscol.builtin').foldfunc"
               )
               " "
@@ -71,11 +74,11 @@
         "BufEnter"
         "BufNew"
       ];
-      desc = "disable statuscolumn for neo-tree and dashboard";
+      desc = "disable statuscolumn for dashboard";
       callback = (
         helpers.mkRaw ''
           function()
-            local ft_ignore = { "dashboard", "neo-tree", "snacks_dashboard" }
+            local ft_ignore = { "dashboard",  "snacks_dashboard" }
             if vim.tbl_contains(ft_ignore, vim.bo.filetype) then
               vim.cmd("setlocal foldcolumn=0")
             end

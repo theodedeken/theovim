@@ -203,36 +203,6 @@
         "type": "github"
       }
     },
-    "oil-lsp-diagnostics": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1737554594,
-        "owner": "JezerM",
-        "repo": "oil-lsp-diagnostics.nvim",
-        "rev": "e04e3c387262b958fee75382f8ff66eae9d037f4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "JezerM",
-        "repo": "oil-lsp-diagnostics.nvim",
-        "type": "github"
-      }
-    },
-    "oil-vcs-status": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1737881301,
-        "owner": "SirZenith",
-        "repo": "oil-vcs-status",
-        "rev": "e0dd01a19f521b2393018e8466d46120a8ffba71",
-        "type": "github"
-      },
-      "original": {
-        "owner": "SirZenith",
-        "repo": "oil-vcs-status",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "buffer-manager": "buffer-manager",
@@ -240,8 +210,6 @@
         "md-pdf": "md-pdf",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim",
-        "oil-lsp-diagnostics": "oil-lsp-diagnostics",
-        "oil-vcs-status": "oil-vcs-status",
         "tokyodark": "tokyodark"
       }
     },

@@ -11,16 +11,6 @@
       flake = false;
     };
 
-    oil-vcs-status = {
-      url = "github:SirZenith/oil-vcs-status";
-      flake = false;
-    };
-
-    oil-lsp-diagnostics = {
-      url = "github:JezerM/oil-lsp-diagnostics.nvim";
-      flake = false;
-    };
-
     tokyodark = {
       url = "github:tiagovla/tokyodark.nvim";
       flake = false;
@@ -32,43 +22,40 @@
     };
   };
 
-  outputs =
-    {
-      self,
-      flake-parts,
-      ...
-    }@inputs:
-    flake-parts.lib.mkFlake { inherit inputs; } {
+  outputs = {
+    self,
+    flake-parts,
+    ...
+  } @ inputs:
+    flake-parts.lib.mkFlake {inherit inputs;} {
       systems = [
         "x86_64-linux"
         "aarch64-linux"
         "x86_64-darwin"
         "aarch64-darwin"
       ];
-      perSystem =
-        {
-          pkgs,
-          config,
-          system,
-          ...
-        }:
-        {
-          devShells.default = pkgs.mkShell {
-            name = "nvix";
-            packages = with pkgs; [
-              # Nix lsp
-              nixd
-              # Nix code formatter
-              alejandra
-              # Nvix itself
-              self.packages.${system}.default
-            ];
-            shellHook = ''
-              echo 1>&2 "🐼: $(id -un) | 🧬: $(nix eval --raw --impure --expr 'builtins.currentSystem') | 🐧: $(uname -r) "
-              echo 1>&2 "Ready to work on nvix!"
-            '';
-          };
+      perSystem = {
+        pkgs,
+        config,
+        system,
+        ...
+      }: {
+        devShells.default = pkgs.mkShell {
+          name = "nvix";
+          packages = with pkgs; [
+            # Nix lsp
+            nixd
+            # Nix code formatter
+            alejandra
+            # Nvix itself
+            self.packages.${system}.default
+          ];
+          shellHook = ''
+            echo 1>&2 "🐼: $(id -un) | 🧬: $(nix eval --raw --impure --expr 'builtins.currentSystem') | 🐧: $(uname -r) "
+            echo 1>&2 "Ready to work on nvix!"
+          '';
         };
+      };
       imports = [
         ./modules
         ./default.nix
