@@ -1,10 +1,10 @@
 {
-  description = "A nixvim configuration";
-  # TODO: work on startup time
+  description = "Nikhil's NixOs / nix-darwin configuration";
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixvim.url = "github:nix-community/nixvim";
     flake-parts.url = "github:hercules-ci/flake-parts";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
 
     buffer-manager = {
       url = "github:j-morano/buffer_manager.nvim";
@@ -22,11 +22,7 @@
     };
   };
 
-  outputs = {
-    self,
-    flake-parts,
-    ...
-  } @ inputs:
+  outputs = {flake-parts, ...} @ inputs:
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = [
         "x86_64-linux"
@@ -34,33 +30,11 @@
         "x86_64-darwin"
         "aarch64-darwin"
       ];
-      perSystem = {
-        pkgs,
-        config,
-        system,
-        ...
-      }: {
-        devShells.default = pkgs.mkShell {
-          name = "nvix";
-          packages = with pkgs; [
-            # Nix lsp
-            nixd
-            # Nix code formatter
-            alejandra
-            # Nvix itself
-            self.packages.${system}.default
-          ];
-          shellHook = ''
-            echo 1>&2 "🐼: $(id -un) | 🧬: $(nix eval --raw --impure --expr 'builtins.currentSystem') | 🐧: $(uname -r) "
-            echo 1>&2 "Ready to work on nvix!"
-          '';
-        };
-      };
       imports = [
-        ./modules
-        ./default.nix
-
         inputs.flake-parts.flakeModules.easyOverlay
+        ./modules/flake
+        ./overlays
+        ./plugins
       ];
     };
 }
