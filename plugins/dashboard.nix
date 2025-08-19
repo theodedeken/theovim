@@ -11,12 +11,10 @@ in {
         center = [
           {
             icon = "";
-            desc = "Press";
+            desc = " Press";
             key = "o";
             key_format = "-> %s";
-            action =
-              mkRaw # lus
-              
+            action = mkRaw # lus
               ''
                 function()
                   local url = "https://c.xkcd.com/random/comic/"
@@ -37,6 +35,13 @@ in {
                 end
 
               '';
+          }
+          {
+            icon = "󰿅";
+            desc = " Quit";
+            key = "<leader>q";
+            key_format = "-> %s";
+            action = "quitall!";
           }
         ];
         packages.enable = false;

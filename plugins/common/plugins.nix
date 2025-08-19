@@ -1,3 +1,7 @@
+{ pkgs, config, ... }:
+let
+  inherit (config.nvix.mkKey) mkKeymap;
+in
 {
   pkgs,
   config,
@@ -61,7 +65,9 @@
     lz-n.enable = true;
     flash = {
       enable = true;
-      settings.modes.char.enabled = false;
+      settings = {
+        modes.char.enabled = false;
+      };
     };
     which-key = {
       enable = true;
@@ -73,4 +79,7 @@
     timeout = true;
     timeoutlen = 250;
   };
+  keymaps = [
+    (mkKeymap "n" "<leader>vt" "<cmd>:lua require('flash').treesitter()<cr>" "Select Treesitter Node")
+  ];
 }

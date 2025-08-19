@@ -35,9 +35,9 @@
       self.nvixPlugins.lang
       self.nvixPlugins.lsp
 
-      # Productivity
-      self.nvixPlugins.autosession
-      self.nvixPlugins.copilot
+    # Productivity
+    self.nvixPlugins.autosession
+    self.nvixPlugins.ai
 
       # Dashboard (Auto session works so rarely i see this.)
       self.nvixPlugins.dashboard
@@ -58,7 +58,3 @@ in {
     theovim = config.packages.default;
   };
 }
-# TODO: Plugins -- config to be added
-# - [ ] obsidian nvim
-# - [ ] quickfix list addition in lsp
-

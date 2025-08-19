@@ -13,6 +13,50 @@ in
     );
   luaLoader.enable = false;
 
+  extraConfigLua =
+    with icons.diagnostics;
+    # lua
+    ''
+      local function my_paste(reg)
+        return function(lines)
+          local content = vim.fn.getreg('"')
+          return vim.split(content, '\n')
+        end
+      end
+      if (os.getenv('SSH_TTY') ~= nil)
+        then
+          vim.g.clipboard = {
+            name = 'OSC 52',
+            copy = {
+              ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+              ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+            },
+            paste = {
+              ["+"] = my_paste("+"),
+              ["*"] = my_paste("*"),
+            },
+          }
+        end
+
+
+
+      vim.opt.whichwrap:append("<>[]hl")
+      vim.opt.listchars:append("space:·")
+
+      -- below part set's the Diagnostic icons/colors
+      local signs = {
+        Hint = "${BoldHint}",
+        Info = "${BoldInformation}",
+        Warn = "${BoldWarning}",
+        Error = "${BoldError}",
+      }
+
+      for type, icon in pairs(signs) do
+        local hl = "DiagnosticSign" .. type
+        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+      end
+    '';
+
   globals = {
     mapleader = config.nvix.leader; # sets <space> as my leader key
     floating_window_options.border = config.nvix.border;
@@ -61,6 +105,8 @@ in
     smoothscroll = true;
     scrolloff = 8;
     autoread = true;
+    autowrite = true;
+    swapfile = false;
     fillchars = {
       eob = " ";
     };
@@ -80,26 +126,20 @@ in
             end
           '';
     }
+    {
+      desc = "Check file changes";
+      event = [ "FocusGained" "BufEnter" "CursorHold" ];
+      pattern = [ "*" ];
+      callback = mkRaw # lua
+        ''
+          function()
+            if vim.fn.mode() ~= "c" then
+              vim.cmd("checktime")
+            end
+          end
+        '';
+    }
   ];
 
-  extraLuaPackages = lp: with lp; [luarocks];
-  extraConfigLua = with icons.diagnostics;
-  # lua
-    ''
-      vim.opt.whichwrap:append("<>[]hl")
-      vim.opt.listchars:append("space:·")
-
-      -- below part set's the Diagnostic icons/colors
-      local signs = {
-        Hint = "${BoldHint}",
-        Info = "${BoldInformation}",
-        Warn = "${BoldWarning}",
-        Error = "${BoldError}",
-      }
-
-      for type, icon in pairs(signs) do
-        local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-      end
-    '';
+  extraLuaPackages = lp: with lp; [ luarocks ];
 }

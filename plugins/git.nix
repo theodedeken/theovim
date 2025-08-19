@@ -5,20 +5,25 @@ let
   inherit (config.nvix.mkKey) mkKeymap wKeyObj;
 in
 {
-  plugins.gitsigns = {
-    enable = true;
-    settings = {
-      current_line_blame = true;
-      signs = with icons.ui; {
-        add.text = "${LineLeft}";
-        change.text = "${LineLeft}";
-        delete.text = "${LineLeft}";
-        topdelete.text = "${Triangle}";
-        changedelete.text = "${BoldLineLeft}";
+  plugins = {
+    git-conflict = {
+      enable = true;
+      settings.default_mappings = true;
+    };
+    gitsigns = {
+      enable = true;
+      settings = {
+        current_line_blame = true;
+        signs = with icons.ui; {
+          add.text = "${LineLeft}";
+          change.text = "${LineLeft}";
+          delete.text = "${LineLeft}";
+          topdelete.text = "${Triangle}";
+          changedelete.text = "${BoldLineLeft}";
+        };
       };
     };
   };
-
   wKeyList = [
     (wKeyObj [ "<leader>g" "" "git" ])
     (wKeyObj [ "<leader>gh" "󰫅" "hunks" ])
@@ -66,5 +71,4 @@ in
     (mkKeymap "x" "ih" ":<C-U>Gitsigns select_hunk<CR>" "GitSigns Select Hunk")
 
   ];
-
 }

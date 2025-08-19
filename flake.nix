@@ -22,14 +22,10 @@
     };
   };
 
-  outputs = {flake-parts, ...} @ inputs:
-    flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = [
-        "x86_64-linux"
-        "aarch64-linux"
-        "x86_64-darwin"
-        "aarch64-darwin"
-      ];
+  outputs = inputs@{ flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = import inputs.systems;
+      _module.args = { inherit inputs; };
       imports = [
         inputs.flake-parts.flakeModules.easyOverlay
         ./modules/flake

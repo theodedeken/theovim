@@ -1,7 +1,6 @@
 { lib, config, ... }:
 let
   inherit (config.nvix.mkKey) mkKeymap;
-  inherit (lib.nixvim) mkRaw;
 in
 {
 
@@ -18,6 +17,9 @@ in
         set_filetype = true;
       };
     };
+    # TODO: Add mappings in parallel with quickfix
+    trouble.enable = true;
+    tiny-inline-diagnostic.enable = true;
     lsp = {
       keymaps.extra = [
         (mkKeymap "n" "<leader>lO" "<cmd>lua require('otter').activate()<cr>" "Force Otter")
@@ -79,26 +81,6 @@ in
       focusable = false;
     };
   };
-  autoCmd = [
-    {
-      event = [ "CursorHold" ];
-      desc = "lsp show diagnostics on CursorHold";
-      callback =
-        mkRaw # lua
-
-          ''
-            function()
-             local hover_opts = {
-                focusable = false,
-                close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-                border = "${config.nvix.border}",
-                source = "always",
-              }
-              vim.diagnostic.open_float(nil, hover_opts)
-            end
-          '';
-    }
-  ];
 
   imports =
     with builtins;

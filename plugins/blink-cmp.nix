@@ -2,6 +2,7 @@
   inherit (lib.nixvim) mkRaw;
 in {
   plugins = {
+    luasnip.enable = true;
     blink-cmp = {
       enable = true;
       settings = {

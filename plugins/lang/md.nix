@@ -1,11 +1,28 @@
 { pkgs, config, lib, ... }:
 let
   inherit (config.nvix.mkKey) wKeyObj;
+  inherit (config.nvix) icons;
   inherit (lib.nixvim) mkRaw;
 in
 {
   plugins = {
+    img-clip.enable = true;
     markdown-preview.enable = true;
+    render-markdown.enable = true;
+    mkdnflow = {
+      enable = true;
+      toDo.symbols = [ " " "⧖" "x" ];
+      mappings = {
+        MkdnEnter = {
+          key = "<cr>";
+          modes = [ "n" "i" ];
+        };
+        MkdnToggleToDo = {
+          key = "<c-space>";
+          modes = [ "n" "i" ];
+        };
+      };
+    };
     glow = {
       enable = true;
       lazyLoad.settings = {
@@ -14,8 +31,6 @@ in
       };
     };
   };
-
-  # TODO: Add mkdnflow
 
   autoCmd = [
     {
@@ -38,11 +53,4 @@ in
   wKeyList = [
     (wKeyObj [ "<leader>p" "" "preview" ])
   ];
-  extraPlugins = with pkgs.vimPlugins; [ img-clip-nvim ];
-  extraPackages =
-    with pkgs;
-    if pkgs.stdenv.isDarwin then
-      [ pngpaste ]
-    else
-      [ wl-clipboard ];
 }
