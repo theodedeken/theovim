@@ -1,8 +1,6 @@
-{ config, ... }:
-let
+{config, ...}: let
   inherit (config.nvix.mkKey) mkKeymap;
-in
-{
+in {
   plugins.auto-session = {
     enable = true;
     autoLoad = true;

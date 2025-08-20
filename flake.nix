@@ -6,28 +6,14 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
 
-    buffer-manager = {
-      url = "github:j-morano/buffer_manager.nvim";
-      flake = false;
-    };
-
-    tokyodark = {
-      url = "github:tiagovla/tokyodark.nvim";
-      flake = false;
-    };
-
-    md-pdf = {
-      url = "github:arminveres/md-pdf.nvim";
-      flake = false;
-    };
+    systems.url = "github:nix-systems/default";
   };
 
-  outputs = inputs@{ flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
+  outputs = inputs @ {flake-parts, ...}:
+    flake-parts.lib.mkFlake {inherit inputs;} {
       systems = import inputs.systems;
-      _module.args = { inherit inputs; };
+      _module.args = {inherit inputs;};
       imports = [
-        inputs.flake-parts.flakeModules.easyOverlay
         ./modules/flake
         ./overlays
         ./plugins

@@ -26,7 +26,7 @@
 
       # UI and appearance
       self.nvixPlugins.lualine
-      self.nvixPlugins.neo-tree
+      self.nvixPlugins.explorer
       self.nvixPlugins.firenvim
 
       # Code editing and syntax
@@ -53,8 +53,5 @@ in {
     bare = mkNixvim bareModules;
     core = mkNixvim coreModules;
     full = mkNixvim fullModules;
-  };
-  overlayAttrs = {
-    theovim = config.packages.default;
   };
 }
