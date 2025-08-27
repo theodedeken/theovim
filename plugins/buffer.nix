@@ -1,9 +1,11 @@
-{ config, lib, ... }:
-let
+{
+  config,
+  lib,
+  ...
+}: let
   inherit (config.nvix.mkKey) mkKeymap wKeyObj;
   inherit (lib.nixvim) mkRaw;
-in
-{
+in {
   plugins = {
     harpoon = {
       enable = true;
@@ -12,14 +14,24 @@ in
       enable = true;
       settings.options = rec {
         diagnostics = "nvim_lsp";
+        separator_style = "slant";
         buffer_close_icon = "󰅙";
         close_icon = buffer_close_icon;
         always_show_bufferline = true;
+        indicator.style = "underline";
         hover = {
           enabled = true;
           delay = 200;
-          reveal = [ "close" ];
+          reveal = ["close"];
         };
+        offsets = [
+          {
+            filetype = "snacks_layout_box";
+            text = "Snacks Explorer";
+            highlight = "Directory";
+            text_align = "center";
+          }
+        ];
       };
     };
   };
@@ -39,7 +51,9 @@ in
 
   keymaps = [
     (mkKeymap "n" "<leader>b."
-      (mkRaw # lua
+      (
+        mkRaw # lua
+        
         ''
           function()
             harpoon = require("harpoon")
@@ -48,7 +62,9 @@ in
         ''
       ) "Add File to Harpoon")
     (mkKeymap "n" "<leader>bb"
-      (mkRaw # lua
+      (
+        mkRaw # lua
+        
         ''
           function()
             harpoon = require("harpoon")
@@ -66,7 +82,8 @@ in
     (mkKeymap "n" "<leader>bt" "<cmd>BufferLineSortByTabs<cr>" "Buffer Sort by Tabs")
     (mkKeymap "n" "<leader>bL" "<cmd>BufferLineCloseRight<cr>" "Buffer close all to right")
     (mkKeymap "n" "<leader>bH" "<cmd>BufferLineCloseLeft<cr>" "Buffer close all to left")
-    (mkKeymap "n" "<leader>bc" "<cmd>BufferLineCloseOther<cr>"
+    (
+      mkKeymap "n" "<leader>bc" "<cmd>BufferLineCloseOther<cr>"
       "Buffer close all except the current buffer"
     )
     (mkKeymap "n" "<a-s-h>" "<cmd>BufferLineMovePrev<cr>" "Move buffer to left")
@@ -84,5 +101,4 @@ in
     (mkKeymap "n" "<leader><tab>q" "<cmd>tabclose<cr>" "Close Tab")
     (mkKeymap "n" "<leader><tab>n" "<cmd>tabnew<cr>" "New Tab")
   ];
-
 }

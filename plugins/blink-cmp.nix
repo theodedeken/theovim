@@ -7,6 +7,10 @@ in {
       enable = true;
       settings = {
         completion.menu.border = "rounded";
+        completion.documentation = {
+          auto_show = true;
+          auto_show_delay_ms = 250;
+        };
         keymap = {
           "<C-j>" = ["select_next" "fallback"];
           "<C-k>" = ["select_prev" "fallback"];
