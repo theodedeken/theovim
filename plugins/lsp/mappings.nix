@@ -1,13 +1,14 @@
-{ config, lib, ... }:
-let
+{
+  config,
+  lib,
+  ...
+}: let
   inherit (lib.nixvim) mkRaw;
   inherit (config.nvix.mkKey) mkKeymap wKeyObj;
-in
-{
-
+in {
   wKeyList = [
-    (wKeyObj [ "<leader>lg" "" "goto" ])
-    (wKeyObj [ "<leader>l" "󰿘" "lsp" ])
+    (wKeyObj ["<leader>lg" "" "goto"])
+    (wKeyObj ["<leader>l" "󰿘" "lsp"])
   ];
 
   plugins.lsp.keymaps.extra = [
@@ -41,7 +42,9 @@ in
 
     # UFO
     (mkKeymap "n" "zR"
-      (mkRaw # lua
+      (
+        mkRaw # lua
+        
         ''
           function()
             require("ufo").openAllFolds()
@@ -49,7 +52,9 @@ in
         ''
       ) "Open all folds")
     (mkKeymap "n" "zM"
-      (mkRaw # lua
+      (
+        mkRaw # lua
+        
         ''
           function()
             require("ufo").closeAllFolds()
@@ -57,7 +62,9 @@ in
         ''
       ) "Close All Folds")
     (mkKeymap "n" "zK"
-      (mkRaw # lua
+      (
+        mkRaw # lua
+        
         ''
           function()
             local winid = require("ufo").peekFoldedLinesUnderCursor()
@@ -67,11 +74,21 @@ in
           end
         ''
       ) "Peek Folded Lines")
-
     (mkKeymap "n" "<leader>lq" "<CMD>LspStop<Enter>" "Stop LSP")
     (mkKeymap "n" "<leader>li" "<cmd>LspInfo<cr>" "LSP Info")
     (mkKeymap "n" "<leader>ls" "<CMD>LspStart<Enter>" "Start LSP")
-    (mkKeymap "n" "<leader>lR" "<CMD>LspRestart<Enter>" "Restart LSP")
+    (mkKeymap "n" "<leader>lR" (
+      mkRaw # lua
+      
+      ''
+        function()
+          -- Rustaceanvim
+          if vim.fn.exists(':RustAnalyzer') > 0 then vim.cmd('RustAnalyzer restart') end
+          -- Other lsps
+          vim.cmd('LspRestart')
+        end
+      ''
+    ) "Restart LSP")
 
     (mkKeymap "n" "<C-s-k>" "<cmd>:lua vim.lsp.buf.signature_help()<cr>" "Signature Help")
     (mkKeymap "n" "<leader>lD" "<cmd>:lua Snacks.picker.lsp_definitions()<cr>" "Definitions list")
@@ -89,7 +106,9 @@ in
     (mkKeymap "n" "[d" "<cmd>:lua vim.diagnostic.goto_prev()<cr>" "Previous Diagnostic")
     (mkKeymap "n" "]d" "<cmd>:lua vim.diagnostic.goto_next()<cr>" "Next Diagnostic")
     (mkKeymap "n" "<leader>lL"
-      (mkRaw # lua
+      (
+        mkRaw # lua
+        
         ''
           function()
             if vim.g.diagnostic_visible or vim.g.diagnostics_visible == nil then
@@ -103,7 +122,9 @@ in
         ''
       ) "Toggle Diagnostics")
     (mkKeymap "n" "<leader>ll"
-      (mkRaw # lua
+      (
+        mkRaw # lua
+        
         ''
           function()
             if vim.diagnostic.config().virtual_text == false then
