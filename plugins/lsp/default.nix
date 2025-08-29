@@ -1,9 +1,10 @@
-{ lib, config, ... }:
-let
-  inherit (config.nvix.mkKey) mkKeymap;
-in
 {
-
+  lib,
+  config,
+  ...
+}: let
+  inherit (config.nvix.mkKey) mkKeymap;
+in {
   opts = {
     foldcolumn = "1";
     foldlevel = 99;
@@ -42,21 +43,24 @@ in
     };
     lspsaga = {
       enable = true;
-      lightbulb = {
-        enable = false;
-        virtualText = false;
-      };
-      outline.keys.jump = "<cr>";
-      ui.border = config.nvix.border;
-      scrollPreview = {
-        scrollDown = "<c-d>";
-        scrollUp = "<c-u>";
+      settings = {
+        lightbulb = {
+          enable = false;
+          virtualText = false;
+        };
+        outline.keys.jump = "<cr>";
+        ui.border = config.nvix.border;
+        scrollPreview = {
+          scrollDown = "<c-d>";
+          scrollUp = "<c-u>";
+        };
       };
     };
     nvim-ufo = {
       enable = true;
       settings = {
-        provider_selector = # lua
+        provider_selector =
+          # lua
           ''
             function()
               return { "lsp", "indent" }
@@ -82,9 +86,8 @@ in
     };
   };
 
-  imports =
-    with builtins;
-    with lib;
+  imports = with builtins;
+  with lib;
     map (fn: ./${fn}) (
       filter (fn: (fn != "default.nix" && !hasSuffix ".md" "${fn}")) (attrNames (readDir ./.))
     );
