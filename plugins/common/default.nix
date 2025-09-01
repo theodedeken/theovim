@@ -1,5 +1,6 @@
 # This is common neovim settings with basic plugin sets
 {
+  pkgs,
   config,
   lib,
   ...
@@ -13,33 +14,11 @@ in {
       filter (fn: (fn != "default.nix" && !hasSuffix ".md" "${fn}")) (attrNames (readDir ./.))
     );
   luaLoader.enable = false;
-
+  # copy to system clipboard on wayland
+  extraPackages = with pkgs; [wl-clipboard];
   extraConfigLua = with icons.diagnostics;
   # lua
     ''
-      local function my_paste(reg)
-        return function(lines)
-          local content = vim.fn.getreg('"')
-          return vim.split(content, '\n')
-        end
-      end
-      if (os.getenv('SSH_TTY') ~= nil)
-        then
-          vim.g.clipboard = {
-            name = 'OSC 52',
-            copy = {
-              ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
-              ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
-            },
-            paste = {
-              ["+"] = my_paste("+"),
-              ["*"] = my_paste("*"),
-            },
-          }
-        end
-
-
-
       vim.opt.whichwrap:append("<>[]hl")
       vim.opt.listchars:append("space:·")
 
