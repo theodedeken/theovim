@@ -1,21 +1,21 @@
 # This is common neovim settings with basic plugin sets
-{ config, lib, ... }:
-let
+{
+  config,
+  lib,
+  ...
+}: let
   inherit (config.nvix) icons;
   inherit (lib.nixvim) mkRaw;
-in
-{
-  imports =
-    with builtins;
-    with lib;
+in {
+  imports = with builtins;
+  with lib;
     map (fn: ./${fn}) (
       filter (fn: (fn != "default.nix" && !hasSuffix ".md" "${fn}")) (attrNames (readDir ./.))
     );
   luaLoader.enable = false;
 
-  extraConfigLua =
-    with icons.diagnostics;
-    # lua
+  extraConfigLua = with icons.diagnostics;
+  # lua
     ''
       local function my_paste(reg)
         return function(lines)
@@ -120,17 +120,20 @@ in
       event = ["TextYankPost"];
       callback =
         mkRaw # lua
-          ''
-            function()
-              vim.highlight.on_yank()
-            end
-          '';
+        
+        ''
+          function()
+            vim.highlight.on_yank()
+          end
+        '';
     }
     {
       desc = "Check file changes";
-      event = [ "FocusGained" "BufEnter" "CursorHold" ];
-      pattern = [ "*" ];
-      callback = mkRaw # lua
+      event = ["FocusGained" "BufEnter" "CursorHold"];
+      pattern = ["*"];
+      callback =
+        mkRaw # lua
+        
         ''
           function()
             if vim.fn.mode() ~= "c" then
@@ -141,5 +144,5 @@ in
     }
   ];
 
-  extraLuaPackages = lp: with lp; [ luarocks ];
+  extraLuaPackages = lp: with lp; [luarocks];
 }
