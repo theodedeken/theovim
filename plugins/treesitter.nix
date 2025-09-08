@@ -11,7 +11,6 @@
             "markdown"
           ];
         };
-        auto_install = true;
         indent_enable = true;
         folding = true;
         autoLoad = true;
