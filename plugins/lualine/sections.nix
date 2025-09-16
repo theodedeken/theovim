@@ -126,6 +126,17 @@ in
           right = 1;
         };
       }
+      {
+        __unkeyed =
+          mkRaw # lua
+            ''
+              function()
+                if vim.g.disable_autoformat or vim.b.disable_autoformat then
+                  return "autoformat OFF"
+                end
+              end
+            '';
+        }
     ];
     lualine_y = [ "progress" ];
     lualine_z = [

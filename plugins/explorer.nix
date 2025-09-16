@@ -17,6 +17,6 @@ in {
     ])
   ];
   keymaps = [
-    (mkKeymap "n" "<leader>e" "<cmd>:lua Snacks.explorer({resumable = false})<cr>" "Snacks Explorer")
+    (mkKeymap "n" "<leader>e" "<cmd>:lua Snacks.explorer({resumable = false, hidden = true})<cr>" "Snacks Explorer")
   ];
 }
