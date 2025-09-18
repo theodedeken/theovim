@@ -11,7 +11,6 @@ in {
   plugins.conform-nvim = {
     enable = true;
     settings = {
-      default_format_opts.lsp_format = "prefer";
       formatters_by_ft = {
         "_" = [
           "squeeze_blanks"
@@ -23,17 +22,15 @@ in {
       # Always format on save
       # Based on: https://github.com/stevearc/conform.nvim/issues/192
       format_on_save =
-        mkRaw # lua
-
+        mkRaw # Lua
+        
         ''
           function(bufnr)
+            -- Disable with a global or buffer-local variable
             if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
               return
             end
-            return {
-              timeout_ms = 500,
-              lsp_fallback = true,
-            }
+            return { timeout_ms = 500, lsp_format = "last" }
           end
         '';
     };
@@ -42,7 +39,7 @@ in {
     (mkKeymap "n" "<leader>tf"
       (
         mkRaw # lua
-
+        
         ''
           function()
             -- If autoformat is currently disabled for this buffer,
@@ -60,7 +57,7 @@ in {
     (mkKeymap "n" "<leader>tF"
       (
         mkRaw # lua
-
+        
         ''
           function()
             -- If autoformat is currently disabled globally,
