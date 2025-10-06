@@ -19,8 +19,6 @@ in {
     (mkKeymap "n" "<leader>.r" "<cmd>:lua Snacks.rename.rename_file()<cr>" "Rename file/variable +lsp")
     (mkKeymap "n" "<leader>gB" "<cmd>:lua Snacks.gitbrowse()<cr>" "Git Browse")
     (mkKeymap "n" "<leader>gf" "<cmd>:lua Snacks.lazygit.log_file()<cr>" "Lazygit Current File History")
-    (mkKeymap "n" "<leader>gB" "<cmd>:lua Snacks.gitbrowse()<cr>" "Git Browse")
-    (mkKeymap "n" "<leader>gf" "<cmd>:lua Snacks.lazygit.log_file()<cr>" "Lazygit Current File History")
     (mkKeymap "n" "<leader>gg" "<cmd>:lua Snacks.lazygit()<cr>" "Lazygit")
     (mkKeymap "n" "<leader>gl" "<cmd>:lua Snacks.lazygit.log()<cr>" "Lazygit Log (cwd)")
     (mkKeymap "n" "<leader>gL" "<cmd>:lua Snacks.picker.git_log()<cr>" "Git Log (cwd)")

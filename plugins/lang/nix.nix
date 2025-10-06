@@ -1,4 +1,5 @@
-{
+{pkgs, ...}: {
+  extraPackages = [pkgs.alejandra];
   plugins = {
     lsp.servers = {
       nixd = {

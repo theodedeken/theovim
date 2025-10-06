@@ -14,7 +14,9 @@ in {
             desc = " Press";
             key = "o";
             key_format = "-> %s";
-            action = mkRaw # lus
+            action =
+              mkRaw # lua
+              
               ''
                 function()
                   local url = "https://c.xkcd.com/random/comic/"

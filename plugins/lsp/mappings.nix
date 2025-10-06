@@ -105,22 +105,7 @@ in {
 
     (mkKeymap "n" "[d" "<cmd>:lua vim.diagnostic.goto_prev()<cr>" "Previous Diagnostic")
     (mkKeymap "n" "]d" "<cmd>:lua vim.diagnostic.goto_next()<cr>" "Next Diagnostic")
-    (mkKeymap "n" "<leader>lL"
-      (
-        mkRaw # lua
-        
-        ''
-          function()
-            if vim.g.diagnostic_visible or vim.g.diagnostics_visible == nil then
-              vim.g.diagnostics_visible = false
-              vim.diagnostic.disable()
-            else
-               vim.g.diagnostics_visible = true
-               vim.diagnostic.enable()
-            end
-          end
-        ''
-      ) "Toggle Diagnostics")
+
     (mkKeymap "n" "<leader>ll"
       (
         mkRaw # lua

@@ -35,10 +35,6 @@ in {
       };
       keymaps = {
         silent = true;
-        diagnostic = {
-          "<leader>lj" = "goto_next";
-          "<leader>lk" = "goto_prev";
-        };
       };
     };
     lspsaga = {

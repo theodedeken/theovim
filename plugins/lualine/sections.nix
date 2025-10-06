@@ -24,6 +24,14 @@ in {
         __unkeyed = "b:gitsigns_head";
         icon = "${icons.git.Branch}";
         color.gui = "bold";
+        on_click =
+          mkRaw #lua
+          
+          ''
+            function()
+              Snacks.lazygit()
+            end
+          '';
       }
       {
         __unkeyed = "diff";
@@ -47,6 +55,14 @@ in {
           modified = mkRaw ''"${icons.git.LineModified}".. " "'';
           removed = mkRaw ''"${icons.git.LineRemoved}".. " "'';
         };
+        on_click =
+          mkRaw #lua
+          
+          ''
+            function()
+              Snacks.lazygit()
+            end
+          '';
       }
       {
         __unkeyed = "diagnostics";
@@ -59,6 +75,14 @@ in {
           info = mkRaw ''"${icons.diagnostics.BoldInformation}" .. " "'';
           hint = mkRaw ''"${icons.diagnostics.BoldHint}" .. " "'';
         };
+        on_click =
+          mkRaw #lua
+          
+          ''
+            function()
+              vim.cmd("Lspsaga show_buf_diagnostics")
+            end
+          '';
       }
     ];
     lualine_x = [
