@@ -11,7 +11,17 @@ in {
   plugins = {
     img-clip.enable = true;
     markdown-preview.enable = true;
-    render-markdown.enable = true;
+    render-markdown = {
+      enable = true;
+      settings = {
+        code = {
+          width = "block";
+          left_margin = 2;
+          left_pad = 2;
+          right_pad = 2;
+        };
+      };
+    };
     mkdnflow = {
       enable = true;
       settings = {

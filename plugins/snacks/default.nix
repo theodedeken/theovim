@@ -97,6 +97,7 @@ in {
     ghostscript_headless
     tectonic
     mermaid-cli
+    lazygit
   ]; # for image support
 
   autoCmd = [

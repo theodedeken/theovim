@@ -2,6 +2,7 @@
   flake,
   inputs',
   self',
+  pkgs,
   config,
   ...
 }: let
@@ -34,10 +35,11 @@
       self.nvixPlugins.blink-cmp
       self.nvixPlugins.lang
       self.nvixPlugins.lsp
+      self.nvixPlugins.dap
 
-    # Productivity
-    self.nvixPlugins.autosession
-    self.nvixPlugins.ai
+      # Productivity
+      self.nvixPlugins.autosession
+      self.nvixPlugins.ai
 
       # Dashboard (Auto session works so rarely i see this.)
       self.nvixPlugins.dashboard
@@ -48,8 +50,9 @@
       self.nvixPlugins.tex
     ];
 in {
-  packages = {
-    default = self'.packages.core;
+  packages = rec {
+    default = (pkgs.callPackage ./theovim.nix {core = self'.packages.core;}).override {extend = {};};
+    theovim = default;
     bare = mkNixvim bareModules;
     core = mkNixvim coreModules;
     full = mkNixvim fullModules;

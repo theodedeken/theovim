@@ -31,6 +31,12 @@ in {
             highlight = "Directory";
             text_align = "center";
           }
+          {
+            filetype = "dapui_scopes";
+            text = "DAP UI";
+            highlight = "Directory";
+            text_align = "center";
+          }
         ];
       };
     };
