@@ -49,4 +49,8 @@ in {
       description = "Toggle Conditional Breakpoint";
     };
   };
+  theovim.keygroups."<leader>d" = {
+    icon = "";
+    name = "debug";
+  };
 }

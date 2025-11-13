@@ -97,7 +97,9 @@ in
       plugins.conform-nvim.settings = {
         formatters_by_ft.java = ["google-java-format"];
         formatters.google-java-format = {
+          # Use AOSP style
           command = "google-java-format";
+          append_args = ["-a"];
         };
       };
     };

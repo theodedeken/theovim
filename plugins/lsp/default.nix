@@ -70,18 +70,6 @@ in {
     };
   };
 
-  diagnostic.settings = {
-    virtual_text = false;
-    underline = true;
-    signs = true;
-    severity_sort = true;
-    float = {
-      border = config.nvix.border;
-      source = "always";
-      focusable = false;
-    };
-  };
-
   imports = with builtins;
   with lib;
     map (fn: ./${fn}) (

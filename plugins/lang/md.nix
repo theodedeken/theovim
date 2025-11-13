@@ -10,7 +10,10 @@
 in {
   plugins = {
     img-clip.enable = true;
-    markdown-preview.enable = true;
+    markdown-preview = {
+      enable = true;
+    };
+
     render-markdown = {
       enable = true;
       settings = {
@@ -40,6 +43,7 @@ in {
     };
   };
 
+  # TODO: switch to theovim keymap
   autoCmd = [
     {
       desc = "Setup Markdown mappings";
@@ -47,7 +51,7 @@ in {
       pattern = "markdown";
       callback =
         mkRaw # lua
-        
+
         ''
           function()
             -- Set keymap: <leader>p to save and convert to PDF using pandoc

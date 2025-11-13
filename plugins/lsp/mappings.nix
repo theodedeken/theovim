@@ -18,11 +18,9 @@ in {
 
     (mkKeymap "n" "<leader>la" "<cmd>:Lspsaga code_action<cr>" "Code Action")
     (mkKeymap "n" "<leader>lo" "<cmd>Lspsaga outline<cr>" "Outline")
-    (mkKeymap "n" "<leader>lw" "<cmd>Lspsaga show_workspace_diagnostics<cr>" "Workspace Diagnostics")
     (mkKeymap "n" "gd" "<cmd>Lspsaga goto_definition<cr>" "Definitions")
     (mkKeymap "n" "<leader>lr" "<cmd>Lspsaga rename ++project<cr>" "Rename")
     (mkKeymap "n" "gt" "<cmd>Lspsaga goto_type_definition<cr>" "Type Definitions")
-    (mkKeymap "n" "<leader>l." "<cmd>Lspsaga show_line_diagnostics<cr>" "Line Diagnostics")
     (mkKeymap "n" "gpd" "<cmd>Lspsaga peek_definition<cr>" "Peek Definition")
     (mkKeymap "n" "gpt" "<cmd>Lspsaga peek_type_definition<cr>" "Peek Type Definition")
     (mkKeymap "n" "[e" "<cmd>Lspsaga diagnostic_jump_prev<cr>" "Jump Prev Diagnostic")

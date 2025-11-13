@@ -7,7 +7,6 @@
   inherit (lib.nixvim) mkRaw;
   # Set of General mappings not dependent on any plugins
   v = [
-    (mkKeymap "v" "<c-s>" "<esc>:w<cr>" "Saving File")
     (mkKeymap "v" "<c-c>" "<esc>" "Escape")
 
     (mkKeymap "v" "<a-j>" ":m '>+1<cr>gv-gv" "Move Selected Line Down")
@@ -30,7 +29,6 @@
 
   insert = [
     (mkKeymap "i" "jk" "<esc>" "Normal Mode")
-    (mkKeymap "i" "<c-s>" "<esc>:w ++p<cr>" "Save file")
     (mkKeymap "i" "<a-j>" "<esc>:m .+1<cr>==gi" "Move Line Down")
     (mkKeymap "i" "<a-k>" "<esc>:m .-2<cr>==gi" "Move Line Up")
   ];
@@ -61,7 +59,6 @@
       mkKeymap "n" "<c-\\>" ":lua require('smart-splits').move_cursor_previous()<cr>"
       "Move Cursor Previous"
     )
-    (mkKeymap "n" "<c-s>" "<cmd>w ++p<cr>" "Save the file")
     (mkKeymap "n" "<a-+>" "<C-a>" "Increase Number")
     (mkKeymap "n" "<a-->" "<C-x>" "Decrease Number")
 
@@ -84,7 +81,9 @@
     (mkKeymap "n" "<leader>cq" "<cmd>cclose<cr>" "quit quickfix")
 
     (mkKeymap "n" "<leader>id"
-      (mkRaw # lua
+      (
+        mkRaw # lua
+
         ''
           function()
             local date = "# " .. os.date("%d-%m-%y")
@@ -100,7 +99,6 @@
           end
         ''
       ) "Insert Date at cursor position")
-
 
     (mkKeymap "n" "<leader>ft"
       (
@@ -162,23 +160,36 @@
   ];
 in {
   keymaps = insert ++ normal ++ v ++ xv;
-
+  theovim.keymaps.global = {
+    n."<c-s>" = {
+      action = "<cmd>w<cr>";
+      description = "Save file";
+    };
+    i."<c-s>" = {
+      action = "<cmd>w<cr>";
+      description = "Save file";
+    };
+    v."<c-s>" = {
+      action = "<cmd>w<cr>";
+      description = "Save file";
+    };
+  };
   # This is list to present icon on which key
   wKeyList = [
-    (wKeyObj [ "<leader>A" "" "" "true" ])
-    (wKeyObj [ "<leader><leader>" "" "" "true" ])
-    (wKeyObj [ "<leader>q" "" "quit/session" ])
-    (wKeyObj [ "<leader>i" "" "Insert" ])
-    (wKeyObj [ "<leader>v" "󰩬" "Insert" ])
-    (wKeyObj [ "z" "" "fold" ])
-    (wKeyObj [ "g" "" "goto" ])
-    (wKeyObj [ "[" "" "next" ])
-    (wKeyObj [ "]" "" "prev" ])
-    (wKeyObj [ "<leader>u" "󰔎" "ui" ])
-    (wKeyObj [ "<leader>o" "" "Open" ])
-    (wKeyObj [ "<leader>|" "" "vsplit" ])
-    (wKeyObj [ "<leader>-" "" "split" ])
-    (wKeyObj [ "<leader>c" "󰁨" "quickfix" ])
+    (wKeyObj ["<leader>A" "" "" "true"])
+    (wKeyObj ["<leader><leader>" "" "" "true"])
+    (wKeyObj ["<leader>q" "" "quit/session"])
+    (wKeyObj ["<leader>i" "" "Insert"])
+    (wKeyObj ["<leader>v" "󰩬" "Insert"])
+    (wKeyObj ["z" "" "fold"])
+    (wKeyObj ["g" "" "goto"])
+    (wKeyObj ["[" "" "next"])
+    (wKeyObj ["]" "" "prev"])
+    (wKeyObj ["<leader>u" "󰔎" "ui"])
+    (wKeyObj ["<leader>o" "" "Open"])
+    (wKeyObj ["<leader>|" "" "vsplit"])
+    (wKeyObj ["<leader>-" "" "split"])
+    (wKeyObj ["<leader>c" "󰁨" "quickfix"])
   ];
 
   extraConfigLua =
