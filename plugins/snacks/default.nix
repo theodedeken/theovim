@@ -40,7 +40,7 @@ in {
       scroll.enabled = false;
       lazygit.config.os.edit =
         mkRaw # lua
-        
+
         ''
           '[ -z "\"$NVIM\"" ] && (nvim -- {{filename}}) || (nvim --server "\"$NVIM\"" --remote-send "\"q\"" && nvim --server "\"$NVIM\"" --remote {{filename}})'
         '';
@@ -95,8 +95,6 @@ in {
   extraPackages = with pkgs; [
     imagemagick
     ghostscript_headless
-    tectonic
-    mermaid-cli
     lazygit
   ]; # for image support
 
@@ -106,7 +104,7 @@ in {
       event = ["VimEnter"];
       callback =
         utils.mkRaw # lua
-        
+
         ''
             -- Taken from https://github.com/folke/snacks.nvim?tab=readme-ov-file#-usage
             function()

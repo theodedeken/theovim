@@ -13,7 +13,6 @@ in {
     settings = {
       formatters_by_ft = {
         "_" = [
-          "squeeze_blanks"
           "trim_whitespace"
           "trim_newlines"
         ];
@@ -30,7 +29,7 @@ in {
             if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
               return
             end
-            return { timeout_ms = 500, lsp_format = "first" }
+            return { timeout_ms = 500, lsp_format = "fallback" }
           end
         '';
     };

@@ -26,7 +26,6 @@ in {
 
     # Telescope replacement
     (mkKeymap "n" "<leader>sP" "<cmd>:lua Snacks.picker()<cr>" "Pickers")
-    (mkKeymap "n" "<leader>ss" "<cmd>:lua Snacks.picker.smart()<cr>" "Smart")
     (mkKeymap "n" "<leader>st" "<cmd>:lua Snacks.picker.todo_comments({layout = 'ivy'})<cr>" "Todo")
     (
       mkKeymap "n" "<leader>sT"
@@ -61,9 +60,8 @@ in {
         ''
       ) "Undo")
 
-    (mkKeymap "n" "<C-p>" "<cmd>:lua Snacks.picker.files()<cr>" "Find Files")
+    (mkKeymap "n" "<C-p>" "<cmd>:lua Snacks.picker.files({matcher = {frecency = true, history_bonus = true}})<cr>" "Find Files")
 
-    (mkKeymap "n" "<leader>fF" "<cmd>:lua Snacks.picker.smart()<cr>" "Smart")
     (mkKeymap "n" "<leader>f/" "<cmd>:lua Snacks.picker.grep()<cr>" "Grep")
     (mkKeymap "n" "<leader>fr" "<cmd>:lua Snacks.picker.recent()<cr>" "Recent")
     (mkKeymap "n" "<leader>fp" "<cmd>:lua Snacks.picker.projects()<cr>" "Pickers")

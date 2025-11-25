@@ -6,9 +6,9 @@
   flake.overlays.default = final: prev: {
     stable = import inputs.nixpkgs-stable {
       allowUnfree = true;
-      inherit (prev) system;
+      inherit (prev.stdenv.hostPlatform) system;
       overlays = prev.lib.attrValues self.overlays;
     };
-    theovim = self.packages.${prev.system}.default;
+    theovim = self.packages.${prev.stdenv.hostPlatform.system}.default;
   };
 }
