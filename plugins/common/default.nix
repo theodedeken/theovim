@@ -58,7 +58,6 @@ in {
     ignorecase = true;
     smartcase = true;
     mouse = "a";
-    cmdheight = 0;
 
     number = true;
     relativenumber = true;

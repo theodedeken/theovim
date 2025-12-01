@@ -11,12 +11,6 @@ in {
   plugins.conform-nvim = {
     enable = true;
     settings = {
-      formatters_by_ft = {
-        "_" = [
-          "trim_whitespace"
-          "trim_newlines"
-        ];
-      };
       formatters.squeeze_blanks.command = lib.getExe' pkgs.coreutils "cat";
       # Always format on save
       # Based on: https://github.com/stevearc/conform.nvim/issues/192
