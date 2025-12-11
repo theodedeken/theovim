@@ -1,5 +1,5 @@
-{inputs, ...}: let
-  inherit (inputs.nixvim.lib.nixvim.plugins) mkNeovimPlugin;
+{lib, ...}: let
+  inherit (lib.nixvim.plugins) mkNeovimPlugin;
 in
   mkNeovimPlugin {
     name = "vim-coach";

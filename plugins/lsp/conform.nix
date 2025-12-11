@@ -1,7 +1,6 @@
 # Formatter with lsp fallback
 {
   lib,
-  pkgs,
   config,
   ...
 }: let
@@ -11,7 +10,6 @@ in {
   plugins.conform-nvim = {
     enable = true;
     settings = {
-      formatters.squeeze_blanks.command = lib.getExe' pkgs.coreutils "cat";
       # Always format on save
       # Based on: https://github.com/stevearc/conform.nvim/issues/192
       format_on_save =

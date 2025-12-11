@@ -11,7 +11,7 @@
   };
 
   colorschemes.tokyonight = {
-    enable = true;
+    enable = false;
     settings = {
       style = "storm";
       styles = {
@@ -46,6 +46,26 @@
       base0D = "#69C3FF";
       base0E = "#22ECDB";
       base0F = "#B78AFF";
+    };
+  };
+  colorschemes.onedarkpro-nvim = {
+    enable = true;
+    settings = {
+      styles = {
+        types = "NONE";
+        methods = "NONE";
+        numbers = "NONE";
+        strings = "NONE";
+        comments = "italic";
+        keywords = "bold,italic";
+        constants = "NONE";
+        functions = "italic";
+        operators = "NONE";
+        variables = "NONE";
+        parameters = "bold";
+        conditionals = "italic";
+        virtual_text = "NONE";
+      };
     };
   };
 }
