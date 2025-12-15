@@ -51,6 +51,12 @@
   colorschemes.onedarkpro-nvim = {
     enable = true;
     settings = {
+      highlights = {
+        LspInlayHint = {
+          fg = "#4a4d73";
+          bg = "#1d1f2d";
+        };
+      };
       styles = {
         types = "NONE";
         methods = "NONE";
@@ -62,7 +68,7 @@
         functions = "italic";
         operators = "NONE";
         variables = "NONE";
-        parameters = "bold";
+        parameters = "NONE";
         conditionals = "italic";
         virtual_text = "NONE";
       };
