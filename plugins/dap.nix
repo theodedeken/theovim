@@ -36,6 +36,10 @@ in {
   };
   plugins.dap-virtual-text.enable = true;
   theovim.keymaps.global.n = {
+    "<leader>dn" = {
+      action = mkRaw ''function() require("dap").continue() end'';
+      description = "Start new debug session";
+    };
     "<leader>du" = {
       action = mkRaw ''function() require("dapui").toggle({ }) end'';
       description = "Toggle DAP UI";

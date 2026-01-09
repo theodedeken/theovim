@@ -10,7 +10,10 @@ in {
     (wKeyObj ["<leader>lg" "" "goto"])
     (wKeyObj ["<leader>l" "󰿘" "lsp"])
   ];
-
+  theovim.keymaps.global.n."<leader>lh" = {
+    action = mkRaw ''function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end'';
+    description = "Toggle inlay hints";
+  };
   plugins.lsp.keymaps.extra = [
     (mkKeymap "n" "<leader>lO" "<cmd>lua require('otter').activate()<cr>" "Force Otter")
 

@@ -36,7 +36,7 @@ in {
       mkKeymap "n" "<leader>s:" ''<cmd>:lua Snacks.picker.command_history({ layout = 'ivy'})<cr>''
       "Command History"
     )
-    (mkKeymap "n" "<leader>s," "<cmd>:lua Snacks.picker.buffers({layout = 'ivy'})<cr>" "Buffers")
+    (mkKeymap "n" "<leader>fb" "<cmd>:lua Snacks.picker.buffers({layout = 'ivy'})<cr>" "Find buffers")
     (mkKeymap "n" "<leader>sh" ''<cmd>:lua Snacks.picker.help()<cr>'' "Help Pages")
     (mkKeymap "n" "<leader>sk" ''<cmd>:lua Snacks.picker.keymaps({layout = 'vscode'})<cr>'' "Keymaps")
 
@@ -60,11 +60,9 @@ in {
         ''
       ) "Undo")
 
-    (mkKeymap "n" "<C-p>" "<cmd>:lua Snacks.picker.files({matcher = {frecency = true, history_bonus = true}})<cr>" "Find Files")
-
     (mkKeymap "n" "<leader>f/" "<cmd>:lua Snacks.picker.grep()<cr>" "Grep")
     (mkKeymap "n" "<leader>fr" "<cmd>:lua Snacks.picker.recent()<cr>" "Recent")
     (mkKeymap "n" "<leader>fp" "<cmd>:lua Snacks.picker.projects()<cr>" "Pickers")
-    (mkKeymap "n" "<leader>f." "<cmd>:lua Snacks.picker.resume()<cr>" "Resume previous pick")
+    (mkKeymap "n" "<leader>f." "<cmd>:lua Snacks.picker.resume({ exclude = {'explorer'} })<cr>" "Resume previous pick")
   ];
 }

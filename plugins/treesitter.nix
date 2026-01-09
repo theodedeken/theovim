@@ -8,7 +8,6 @@
           enable = true;
           disable = [
             "latex"
-            # "markdown"
           ];
         };
         indent_enable = true;

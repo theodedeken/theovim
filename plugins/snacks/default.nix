@@ -5,26 +5,6 @@
 }: let
   inherit (lib.nixvim) utils mkRaw;
 in {
-  # Overlays
-  nixpkgs.overlays = [
-    (final: prev: {
-      vimPlugins =
-        prev.vimPlugins
-        // {
-          # HACK: override with my own fork to add resumable option
-          snacks-nvim = prev.vimPlugins.snacks-nvim.overrideAttrs (_: {
-            version = "2025-07-31";
-            src = pkgs.fetchFromGitHub {
-              owner = "theodedeken";
-              repo = "snacks.nvim";
-              rev = "e341f923ea7294dff6d167ecc27a88100c579fae";
-              sha256 = "sha256-Uh0QdrFqiUSbOhLiqTKr8BKLXlhu+rStXhQkmyHTsJE=";
-              fetchSubmodules = false;
-            };
-          });
-        };
-    })
-  ];
   # Generalise for all colorschemes
   # <https://github.com/folke/snacks.nvim/discussions/1306#discussioncomment-12266647>
 
@@ -40,7 +20,7 @@ in {
       scroll.enabled = false;
       lazygit.config.os.edit =
         mkRaw # lua
-
+        
         ''
           '[ -z "\"$NVIM\"" ] && (nvim -- {{filename}}) || (nvim --server "\"$NVIM\"" --remote-send "\"q\"" && nvim --server "\"$NVIM\"" --remote {{filename}})'
         '';
@@ -104,7 +84,7 @@ in {
       event = ["VimEnter"];
       callback =
         utils.mkRaw # lua
-
+        
         ''
             -- Taken from https://github.com/folke/snacks.nvim?tab=readme-ov-file#-usage
             function()
