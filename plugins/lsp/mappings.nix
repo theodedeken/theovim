@@ -101,7 +101,6 @@ in {
 
     (mkKeymap "n" "gD" "<cmd>:lua vim.lsp.buf.declaration()<cr>" "Declaration")
     (mkKeymap "n" "gi" "<cmd>:lua vim.lsp.buf.implementation()<cr>" "Implementation")
-    (mkKeymap "n" "gR" "<cmd>:lua vim.lsp.buf.references()<cr>" "References")
     (mkKeymap "n" "gy" "<cmd>:lua vim.lsp.buf.type_definition()<cr>" "Type Definition")
 
     (mkKeymap "n" "[d" "<cmd>:lua vim.diagnostic.goto_prev()<cr>" "Previous Diagnostic")
@@ -122,4 +121,9 @@ in {
         ''
       ) "Toggle Virtual Text")
   ];
+
+  theovim.keymaps.global.n.gr = {
+    action = mkRaw "function() Snacks.picker.lsp_references() end";
+    description = "Show references";
+  };
 }

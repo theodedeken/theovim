@@ -5,7 +5,6 @@
   lib,
   ...
 }: let
-  inherit (config.nvix) icons;
   inherit (lib.nixvim) mkRaw;
 in {
   imports = with builtins;
@@ -16,24 +15,6 @@ in {
   luaLoader.enable = false;
   # copy to system clipboard on wayland
   extraPackages = with pkgs; [wl-clipboard];
-  extraConfigLua = with icons.diagnostics;
-  # lua
-    ''
-      vim.opt.whichwrap:append("<>[]hl")
-
-      -- below part set's the Diagnostic icons/colors
-      local signs = {
-        Hint = "${BoldHint}",
-        Info = "${BoldInformation}",
-        Warn = "${BoldWarning}",
-        Error = "${BoldError}",
-      }
-
-      for type, icon in pairs(signs) do
-        local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-      end
-    '';
 
   globals = {
     mapleader = config.nvix.leader; # sets <space> as my leader key

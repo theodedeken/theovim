@@ -1,9 +1,13 @@
-{ pkgs, config, ... }:
 {
+  pkgs,
+  config,
+  ...
+}: {
   extraPlugins = [
     pkgs.vimPlugins.windows-nvim
   ];
-  extraConfigLua = # lua
+  extraConfigLua =
+    # lua
     ''
       vim.o.winwidth = 10
       vim.o.winminwidth = 10
@@ -49,7 +53,7 @@
     fidget = {
       enable = true;
       settings = {
-        progress.display.progress_icon = [ "moon" ];
+        progress.display.progress_icon = ["moon"];
         notification.window = {
           relative = "editor";
           winblend = 0;

@@ -1,4 +1,5 @@
 {
+  zellij,
   writeText,
   writeShellScriptBin,
   core,
@@ -26,6 +27,7 @@
     '';
 in
   writeShellScriptBin "theovim" ''
+    PATH=$PATH:${zellij}/bin
     name=$(basename $PWD)
     # Check if a session named 'main' exists and has 'EXITED' status
     if zellij ls -n 2>&1 | grep -E "^$name .*EXITED" >/dev/null; then
