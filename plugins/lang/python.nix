@@ -15,7 +15,9 @@ in
         basedpyright = {
           enable = true;
           settings = {
-            pyright.disableOrganizeImports = true;
+            basedpyright.disableOrganizeImports = true;
+            # Do not analyse for types when there are none
+            basedpyright.analysis.useLibraryCodeForTypes = false;
           };
         };
       };

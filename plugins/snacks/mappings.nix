@@ -60,7 +60,7 @@ in {
         ''
       ) "Undo")
 
-    (mkKeymap "n" "<leader>f/" "<cmd>:lua Snacks.picker.grep()<cr>" "Grep")
+    (mkKeymap "n" "<leader>f/" "<cmd>:lua Snacks.picker.grep({hidden = true})<cr>" "Grep")
     (mkKeymap "n" "<leader>fp" "<cmd>:lua Snacks.picker.projects()<cr>" "Pickers")
     (mkKeymap "n" "<leader>f." "<cmd>:lua Snacks.picker.resume({ include = {'grep'} })<cr>" "Resume grep")
   ];

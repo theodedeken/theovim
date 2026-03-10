@@ -30,14 +30,8 @@ in {
       settings = {
         to_do.symbols = [" " "⧖" "x"];
         mappings = {
-          MkdnEnter = {
-            key = "<cr>";
-            modes = ["n" "i"];
-          };
-          MkdnToggleToDo = {
-            key = "<c-space>";
-            modes = ["n" "i"];
-          };
+          MkdnEnter = [["n" "i"] "<cr>"];
+          MkdnToggleToDo = [["n" "i"] "<c-space>"];
         };
       };
     };
@@ -51,7 +45,7 @@ in {
       pattern = "markdown";
       callback =
         mkRaw # lua
-
+        
         ''
           function()
             -- Set keymap: <leader>p to save and convert to PDF using pandoc

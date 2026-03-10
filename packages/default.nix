@@ -54,6 +54,7 @@ in {
   packages = rec {
     default = (pkgs.callPackage ./theovim.nix {core = self'.packages.core;}).override {extend = {};};
     theovim = default;
+    theovim-devcontainer = (pkgs.callPackage ./theovim-devcontainer.nix {inherit theovim;}).override {extend = {};};
     bare = mkNixvim bareModules;
     core = mkNixvim coreModules;
     full = mkNixvim fullModules;
