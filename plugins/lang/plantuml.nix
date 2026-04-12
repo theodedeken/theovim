@@ -37,26 +37,8 @@ in
     config = mkIf config.theovim.lang.plantuml.enable {
       plugins = {
         treesitter = {
-          grammarPackages =
-            pkgs.vimPlugins.nvim-treesitter.passthru.allGrammars
-            ++ [
-              treesitter-plantuml-grammar
-            ];
-          luaConfig.post = ''
-            do
-              local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-              -- change the following as needed
-              parser_config.plantuml = {
-                install_info = {
-                  url = "${treesitter-plantuml-grammar}", -- local path or git repo
-                  files = {"src/parser.c"}, -- note that some parsers also require src/scanner.c or src/scanner.cc
-                  branch = "master", -- default branch in case of git repo if different from master
-                  requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
-                },
-                filetype = "plantuml", -- if filetype does not match the parser name
-              }
-            end
-          '';
+          grammarPackages = [treesitter-plantuml-grammar];
+          languageRegister.plantuml = "plantuml";
         };
       };
 
@@ -67,6 +49,10 @@ in
       plugins.markdown-preview = {
         # Use locally hosted plantuml server
         settings.preview_options.uml = mkRaw "{server = 'http://127.0.0.1:8301/plantuml'}";
+      };
+      filetype.extension = {
+        plantuml = "plantuml";
+        puml = "plantuml";
       };
     };
   }

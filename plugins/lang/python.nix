@@ -21,6 +21,8 @@ in
           };
         };
       };
+      # Handle formatting of python code blocks
+      plugins.conform-nvim.settings.formatters.injected.options.lang_to_formatters.python = ["ruff_format"];
       # Typechecking
       plugins = {
         none-ls = {
@@ -32,6 +34,7 @@ in
           testRunner = "pytest";
         };
       };
+      plugins.treesitter.grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [python];
       theovim.keymaps.python.n = {
         "<leader>tm" = {
           action = mkRaw "require'dap-python'.test_method";

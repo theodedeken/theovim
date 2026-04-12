@@ -6,13 +6,13 @@
         enable = true;
       };
       statix.enable = true;
-
     };
-      conform-nvim.settings = {
-        formatters_by_ft.nix = ["alejandra"];
-        formatters.alejandra = {
-          command = "alejandra";
-        };
+    conform-nvim.settings = {
+      formatters_by_ft.nix = ["alejandra" "injected"];
+      formatters.alejandra = {
+        command = "alejandra";
       };
+    };
+    treesitter.grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [nix];
   };
 }

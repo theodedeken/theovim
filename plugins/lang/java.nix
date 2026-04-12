@@ -102,5 +102,6 @@ in
           append_args = ["-a"];
         };
       };
+      plugins.treesitter.grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [java];
     };
   }

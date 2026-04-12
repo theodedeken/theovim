@@ -23,7 +23,9 @@ in
       theovim.lang.docker.enable = mkEnableOption "Enable dockerfile support";
     };
     config = mkIf config.theovim.lang.docker.enable {
+      # TODO formatter
       # FIXME: override until https://github.com/camdencheek/tree-sitter-dockerfile/pull/52 is merged
       extraFiles."queries/dockerfile/injections.scm".source = docker-patched-injections;
+      plugins.treesitter.grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [docker];
     };
   }

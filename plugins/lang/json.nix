@@ -16,6 +16,7 @@ in
         lsp.servers = {
           jsonls.enable = true;
         };
+        treesitter.grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [json];
       };
     };
   }

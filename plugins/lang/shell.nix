@@ -1,12 +1,14 @@
-{ lib, pkgs, ... }:
-let
+{
+  lib,
+  pkgs,
+  ...
+}: let
   formatter = [
     "shellcheck"
     "shellharden"
     "shfmt"
   ];
-in
-{
+in {
   plugins = {
     lsp.servers.bashls.enable = true;
     conform-nvim.settings = {
@@ -27,5 +29,6 @@ in
         };
       };
     };
+    treesitter.grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [bash];
   };
 }

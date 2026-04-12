@@ -36,7 +36,13 @@ in {
       };
     };
   };
-
+  plugins.conform-nvim.settings = {
+    formatters_by_ft.markdown = ["mdformat" "injected"];
+    formatters.mdformat = {
+      append_args = ["--wrap" "100"];
+    };
+  };
+  extraPackages = [pkgs.mdformat];
   # TODO: switch to theovim keymap
   autoCmd = [
     {
