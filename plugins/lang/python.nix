@@ -1,4 +1,5 @@
 {
+  pkgs,
   lib,
   config,
   ...
@@ -12,23 +13,14 @@ in
         # Code Quality
         ruff.enable = true;
         # LSP
-        basedpyright = {
+        zuban = {
           enable = true;
-          settings = {
-            basedpyright.disableOrganizeImports = true;
-            # Do not analyse for types when there are none
-            basedpyright.analysis.useLibraryCodeForTypes = false;
-          };
         };
       };
       # Handle formatting of python code blocks
       plugins.conform-nvim.settings.formatters.injected.options.lang_to_formatters.python = ["ruff_format"];
-      # Typechecking
+      # Debugging
       plugins = {
-        none-ls = {
-          enable = true;
-          sources.diagnostics.mypy.enable = true;
-        };
         dap-python = {
           enable = true;
           testRunner = "pytest";
