@@ -11,6 +11,17 @@ in {
     foldlevelstart = -1;
     foldenable = true;
   };
+  lsp = {
+    inlayHints.enable = true;
+    keymaps = [
+    ];
+    servers = {
+      typos_lsp = {
+        enable = true;
+        config.init_options.diagnosticSeverity = "Hint";
+      };
+    };
+  };
   plugins = {
     otter = {
       enable = false;
@@ -21,22 +32,7 @@ in {
     # TODO: Add mappings in parallel with quickfix
     trouble.enable = true;
     tiny-inline-diagnostic.enable = true;
-    lsp = {
-      keymaps.extra = [
-        (mkKeymap "n" "<leader>lO" "<cmd>lua require('otter').activate()<cr>" "Force Otter")
-      ];
-      enable = true;
-      inlayHints = true;
-      servers = {
-        typos_lsp = {
-          enable = true;
-          extraOptions.init_options.diagnosticSeverity = "Hint";
-        };
-      };
-      keymaps = {
-        silent = true;
-      };
-    };
+    lspconfig.enable = true;
     lspsaga = {
       enable = true;
       settings = {

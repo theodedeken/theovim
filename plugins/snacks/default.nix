@@ -5,9 +5,6 @@
 }: let
   inherit (lib.nixvim) utils mkRaw;
 in {
-  # Generalise for all colorschemes
-  # <https://github.com/folke/snacks.nvim/discussions/1306#discussioncomment-12266647>
-
   # TODO: <https://github.com/folke/snacks.nvim/discussions/2003#discussioncomment-13653042>
   # Implement this with a fix, i have done the implementation in nix way, but `grep` seems to break.
   # first check is required if it is from lua or nix
@@ -57,6 +54,40 @@ in {
         win = {
           input.keys = keys;
           list.keys = keys;
+        };
+        sources = {
+          # Overrides to deduplicate results since some lsp servers return duplicates
+          lsp_references = {
+            finder =
+              mkRaw
+              ''
+                function(opts, ctx)
+                  ctx.picker.seen = {}
+                  return require("snacks.picker.source.lsp").references(opts, ctx)
+                end
+              '';
+            transform =
+              mkRaw
+              ''
+                function(item, ctx)
+                  -- vim.print(item)
+                  local seen = ctx.picker.seen
+                  local id = ""
+                  if item.file ~= nil then
+                    id = id .. item.file
+                  end
+                  if item.pos ~= nil then
+                    id = id .. vim.inspect(item.pos)
+                  end
+                  if item.file == nil and item.pos == nil then id = item.text end
+                  if seen[id] then
+                    return false
+                  end
+                  seen[id] = true
+                  return true
+                end
+              '';
+          };
         };
       };
       image = {

@@ -9,7 +9,7 @@ in
   with lib; {
     options = {theovim.lang.python.enable = mkEnableOption "Enable python language support";};
     config = mkIf config.theovim.lang.python.enable {
-      plugins.lsp.servers = {
+      lsp.servers = {
         # Code Quality
         ruff.enable = true;
         # LSP

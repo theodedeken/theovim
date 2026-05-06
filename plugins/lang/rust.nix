@@ -11,6 +11,7 @@ with lib; {
       plugins = {
         rustaceanvim.enable = true;
         crates.enable = true;
+        treesitter.grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [rust];
       };
     };
 }

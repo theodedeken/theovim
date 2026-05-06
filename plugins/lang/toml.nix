@@ -9,7 +9,7 @@ with lib; {
   config =
     mkIf config.theovim.lang.toml.enable
     {
-      plugins.lsp.servers.taplo.enable = true;
+      lsp.servers.taplo.enable = true;
       plugins.conform-nvim.settings = {
         formatters_by_ft.toml = ["taplo"];
         formatters.taplo.command = "taplo format";

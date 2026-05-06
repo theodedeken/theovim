@@ -27,6 +27,6 @@ in
       # FIXME: override until https://github.com/camdencheek/tree-sitter-dockerfile/pull/52 is merged
       extraFiles."queries/dockerfile/injections.scm".source = docker-patched-injections;
       plugins.treesitter.grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [dockerfile];
-      plugins.lsp.servers.dockerls.enable = true;
+      lsp.servers.dockerls.enable = true;
     };
   }

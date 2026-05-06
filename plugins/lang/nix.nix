@@ -10,13 +10,13 @@ with lib; {
     mkIf config.theovim.lang.nix.enable
     {
       extraPackages = [pkgs.alejandra];
-      plugins = {
-        lsp.servers = {
-          nixd = {
-            enable = true;
-          };
-          statix.enable = true;
+      lsp.servers = {
+        nixd = {
+          enable = true;
         };
+        statix.enable = true;
+      };
+      plugins = {
         conform-nvim.settings = {
           formatters_by_ft.nix = ["alejandra" "injected"];
           formatters.alejandra = {

@@ -5,6 +5,10 @@
 }: let
   inherit (lib.nixvim) mkRaw;
   inherit (config.nvix.mkKey) mkKeymap wKeyObj;
+  mkBufKeymap = key: action: {
+    key = key;
+    action = action;
+  };
 in {
   wKeyList = [
     (wKeyObj ["<leader>lg" "" "goto"])
@@ -14,9 +18,7 @@ in {
     action = mkRaw ''function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end'';
     description = "Toggle inlay hints";
   };
-  plugins.lsp.keymaps.extra = [
-    (mkKeymap "n" "<leader>lO" "<cmd>lua require('otter').activate()<cr>" "Force Otter")
-
+  lsp.keymaps = [
     # Lspsaga
 
     (mkKeymap "n" "<leader>la" "<cmd>:Lspsaga code_action<cr>" "Code Action")
@@ -76,20 +78,9 @@ in {
         ''
       ) "Peek Folded Lines")
     (mkKeymap "n" "<leader>lq" "<CMD>LspStop<Enter>" "Stop LSP")
-    (mkKeymap "n" "<leader>li" "<cmd>LspInfo<cr>" "LSP Info")
+    (mkKeymap "n" "<leader>li" "<cmd>checkhealth vim.lsp<cr>" "LSP Info")
     (mkKeymap "n" "<leader>ls" "<CMD>LspStart<Enter>" "Start LSP")
-    (mkKeymap "n" "<leader>lR" (
-      mkRaw # lua
-      
-      ''
-        function()
-          -- Rustaceanvim
-          if vim.fn.exists(':RustAnalyzer') > 0 then vim.cmd('RustAnalyzer restart') end
-          -- Other lsps
-          vim.cmd('LspRestart')
-        end
-      ''
-    ) "Restart LSP")
+    (mkKeymap "n" "<leader>lR" "<CMD>lsp restart<Enter>" "Restart LSP")
 
     (mkKeymap "n" "<C-s-k>" "<cmd>:lua vim.lsp.buf.signature_help()<cr>" "Signature Help")
     (mkKeymap "n" "<leader>lD" "<cmd>:lua Snacks.picker.lsp_definitions()<cr>" "Definitions list")
@@ -99,9 +90,9 @@ in {
     (mkKeymap "x" "<leader>lf" "<cmd>:lua require('conform').format()<cr>" "Format File")
     (mkKeymap "v" "<leader>lf" "<cmd>:lua require('conform').format()<cr>" "Format File")
 
-    (mkKeymap "n" "gD" "<cmd>:lua vim.lsp.buf.declaration()<cr>" "Declaration")
-    (mkKeymap "n" "gi" "<cmd>:lua vim.lsp.buf.implementation()<cr>" "Implementation")
-    (mkKeymap "n" "gy" "<cmd>:lua vim.lsp.buf.type_definition()<cr>" "Type Definition")
+    (mkBufKeymap "gD" "declaration")
+    (mkBufKeymap "gi" "implementation")
+    (mkBufKeymap "gy" "type_definition")
 
     (mkKeymap "n" "[d" "<cmd>:lua vim.diagnostic.goto_prev()<cr>" "Previous Diagnostic")
     (mkKeymap "n" "]d" "<cmd>:lua vim.diagnostic.goto_next()<cr>" "Next Diagnostic")

@@ -11,11 +11,11 @@ in
     };
     config = mkIf config.theovim.lang.json.enable {
       extraPackages = with pkgs; [jq];
+      lsp.servers = {
+        jsonls.enable = true;
+      };
       plugins = {
         conform-nvim.settings.formatters_by_ft.json = ["jq"];
-        lsp.servers = {
-          jsonls.enable = true;
-        };
         treesitter.grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [json];
       };
     };

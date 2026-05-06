@@ -15,8 +15,8 @@ in
     config =
       mkIf config.theovim.lang.shell.enable
       {
+        lsp.servers.bashls.enable = true;
         plugins = {
-          lsp.servers.bashls.enable = true;
           conform-nvim.settings = {
             formatters_by_ft = {
               bash = formatter;

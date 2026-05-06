@@ -10,10 +10,10 @@ in
     };
     config = mkIf config.theovim.lang.gitlab-ci.enable {
       theovim.lang.yaml.enable = true;
+      lsp.servers = {
+        gitlab_ci_ls.enable = true;
+      };
       plugins = {
-        lsp.servers = {
-          gitlab_ci_ls.enable = true;
-        };
       };
       filetype.pattern = {
         ".*%.gitlab%-ci%.ya?ml" = "yaml.gitlab";

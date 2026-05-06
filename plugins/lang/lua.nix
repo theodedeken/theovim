@@ -6,14 +6,14 @@
 with lib; {
   options.theovim.lang.lua.enable = mkEnableOption "Enable lua language support";
   config = mkIf config.theovim.lang.lua.enable {
-    plugins = {
-      lsp.servers.lua_ls = {
-        enable = true;
-        settings.diagnostics = {
-          disable = ["miss-name"];
-          globals = ["vim" "cmp" "Snacks"];
-        };
+    lsp.servers.lua_ls = {
+      enable = true;
+      settings.diagnostics = {
+        disable = ["miss-name"];
+        globals = ["vim" "cmp" "Snacks"];
       };
+    };
+    plugins = {
       conform-nvim.settings = {
         formatters_by_ft.lua = ["stylua"];
         formatters.stylua = {

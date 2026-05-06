@@ -1,15 +1,17 @@
-{ config, lib, ... }:
-let
+{
+  config,
+  lib,
+  ...
+}: let
   inherit (lib.nixvim) mkRaw;
   inherit (config.nvix) icons;
   inherit (config.nvix.mkKey) mkKeymap wKeyObj;
-in
-{
+in {
   plugins = {
-    git-conflict = {
-      enable = true;
-      settings.default_mappings = true;
-    };
+    # git-conflict = {
+    #   enable = true;
+    #   settings.default_mappings = true;
+    # };
     gitsigns = {
       enable = true;
       settings = {
@@ -25,19 +27,21 @@ in
     };
   };
   wKeyList = [
-    (wKeyObj [ "<leader>g" "" "git" ])
-    (wKeyObj [ "<leader>gh" "󰫅" "hunks" ])
-    (wKeyObj [ "<leader>gb" "󰭐" "blame" ])
+    (wKeyObj ["<leader>g" "" "git"])
+    (wKeyObj ["<leader>gh" "󰫅" "hunks"])
+    (wKeyObj ["<leader>gb" "󰭐" "blame"])
   ];
 
   keymaps = [
     (mkKeymap "n" "<leader>ghS" "<cmd>lua require('gitsigns').stage_buffer()<cr>" "Stage Buffer")
     (mkKeymap "n" "<leader>ghu" "<cmd>lua require('gitsigns').undo_stage_hunk()<cr>" "Undo Stage Hunk")
     (mkKeymap "n" "<leader>ghR" "<cmd>lua require('gitsigns').reset_buffer()<cr>" "Reset Buffer")
-    (mkKeymap "n" "<leader>ghp" "<cmd>lua require('gitsigns').preview_hunk_inline()<cr>"
+    (
+      mkKeymap "n" "<leader>ghp" "<cmd>lua require('gitsigns').preview_hunk_inline()<cr>"
       "Preview Hunk Inline"
     )
-    (mkKeymap "n" "<leader>ghb" "<cmd>lua require('gitsigns').blame_line({ full = true })<cr>"
+    (
+      mkKeymap "n" "<leader>ghb" "<cmd>lua require('gitsigns').blame_line({ full = true })<cr>"
       "Blame Line"
     )
     (mkKeymap "n" "<leader>ghB" "<cmd>lua require('gitsigns').blame()<cr>" "Blame Buffer")
@@ -45,7 +49,9 @@ in
     (mkKeymap "n" "<leader>ghd" "<cmd>lua require('gitsigns').diffthis()<cr>" "Diff This")
     (mkKeymap "n" "<leader>ghD" "<cmd>lua require('gitsigns').diffthis('~')<cmd>" "Diff This ~")
     (mkKeymap "n" "]H"
-      (mkRaw # lua
+      (
+        mkRaw # lua
+        
         ''
           function()
             require 'gitsigns'.nav_hunk("last")
@@ -54,7 +60,9 @@ in
       ) "Last Hunk")
 
     (mkKeymap "n" "[H"
-      (mkRaw # lua
+      (
+        mkRaw # lua
+        
         ''
           function()
             require 'gitsigns'.nav_hunk("first")
@@ -69,6 +77,5 @@ in
 
     (mkKeymap "o" "ih" ":<C-U>Gitsigns select_hunk<CR>" "GitSigns Select Hunk")
     (mkKeymap "x" "ih" ":<C-U>Gitsigns select_hunk<CR>" "GitSigns Select Hunk")
-
   ];
 }

@@ -138,7 +138,7 @@ in {
           
           ''
             function()
-              vim.cmd("LspInfo")
+              vim.cmd("checkhealth vim.lsp")
             end
           '';
       }
