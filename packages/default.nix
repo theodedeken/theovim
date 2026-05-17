@@ -37,6 +37,7 @@
       self.nvixPlugins.lsp
       self.nvixPlugins.dap
       self.nvixPlugins.navigation
+      self.nvixPlugins.editing
 
       # Productivity
       self.nvixPlugins.autosession

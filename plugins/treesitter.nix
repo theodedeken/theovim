@@ -12,11 +12,8 @@ in {
       # Grammar packages will be enabled on a language by language basis
       grammarPackages = [];
       settings = {
-        highlight = {
-          enable = true;
-        };
-        indent_enable = true;
-        folding = true;
+        highlight.enable = true;
+        indent.enable = true;
         autoLoad = true;
         incremental_selection.enable = true;
       };
@@ -24,7 +21,6 @@ in {
     treesitter-context = {
       enable = true;
       settings = {
-        max_lines = 4;
         min_window_height = 40;
       };
     };

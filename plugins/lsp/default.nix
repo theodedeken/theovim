@@ -5,12 +5,6 @@
 }: let
   inherit (config.nvix.mkKey) mkKeymap;
 in {
-  opts = {
-    foldcolumn = "1";
-    foldlevel = 99;
-    foldlevelstart = -1;
-    foldenable = true;
-  };
   lsp = {
     inlayHints.enable = true;
     keymaps = [
@@ -45,22 +39,6 @@ in {
         scrollPreview = {
           scrollDown = "<c-d>";
           scrollUp = "<c-u>";
-        };
-      };
-    };
-    nvim-ufo = {
-      enable = true;
-      settings = {
-        provider_selector =
-          # lua
-          ''
-            function()
-              return { "lsp", "indent" }
-            end
-          '';
-        preview.mappings = {
-          close = "q";
-          switch = "K";
         };
       };
     };

@@ -41,7 +41,7 @@
     (mkKeymap "n" "?"
       (
         mkRaw # lua
-
+        
         ''
           function()
             require('flash').jump({
@@ -83,7 +83,7 @@
     (mkKeymap "n" "<leader>id"
       (
         mkRaw # lua
-
+        
         ''
           function()
             local date = "# " .. os.date("%d-%m-%y")
@@ -103,7 +103,7 @@
     (mkKeymap "n" "<leader>ft"
       (
         mkRaw # lua
-
+        
         ''
           function()
             vim.ui.input({ prompt = "Enter FileType: " }, function(input)
@@ -120,7 +120,7 @@
     (mkKeymap "n" "<leader>o"
       (
         mkRaw # lua
-
+        
         ''
           function()
             local word = vim.fn.expand("<cfile>") -- Gets file-like word under cursor
@@ -181,7 +181,6 @@ in {
     (wKeyObj ["<leader>q" "" "quit/session"])
     (wKeyObj ["<leader>i" "" "Insert"])
     (wKeyObj ["<leader>v" "󰩬" "Insert"])
-    (wKeyObj ["z" "" "fold"])
     (wKeyObj ["g" "" "goto"])
     (wKeyObj ["[" "" "next"])
     (wKeyObj ["]" "" "prev"])

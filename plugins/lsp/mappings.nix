@@ -43,40 +43,6 @@ in {
         end
       '') "Hover Doc")
 
-    # UFO
-    (mkKeymap "n" "zR"
-      (
-        mkRaw # lua
-        
-        ''
-          function()
-            require("ufo").openAllFolds()
-          end
-        ''
-      ) "Open all folds")
-    (mkKeymap "n" "zM"
-      (
-        mkRaw # lua
-        
-        ''
-          function()
-            require("ufo").closeAllFolds()
-          end
-        ''
-      ) "Close All Folds")
-    (mkKeymap "n" "zK"
-      (
-        mkRaw # lua
-        
-        ''
-          function()
-            local winid = require("ufo").peekFoldedLinesUnderCursor()
-            if not winid then
-              vim.lsp.buf.hover()
-            end
-          end
-        ''
-      ) "Peek Folded Lines")
     (mkKeymap "n" "<leader>lq" "<CMD>LspStop<Enter>" "Stop LSP")
     (mkKeymap "n" "<leader>li" "<cmd>checkhealth vim.lsp<cr>" "LSP Info")
     (mkKeymap "n" "<leader>ls" "<CMD>LspStart<Enter>" "Start LSP")
