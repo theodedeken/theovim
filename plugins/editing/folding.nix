@@ -59,11 +59,11 @@ in {
   };
   theovim.keymaps.global.n = {
     "zR" = {
-      action = mkRaw ''require("ufo").openAllFolds()'';
+      action = mkRaw ''require("ufo").openAllFolds'';
       description = "Open all folds";
     };
     "zM" = {
-      action = mkRaw ''require("ufo").closeAllFolds()'';
+      action = mkRaw ''require("ufo").closeAllFolds'';
       description = "Close all folds";
     };
   };

@@ -13,9 +13,17 @@ in
         # Code Quality
         ruff.enable = true;
         # LSP
-        zuban = {
-          enable = true;
-        };
+        pyrefly =
+          {
+            enable = true;
+            # Always strict typechecking
+          }
+          // (
+            # Deprecated but still needed until pyrefly 1.0
+            if (builtins.compareVersions pkgs.pyrefly.version "1.0.0") < 0
+            then {config.settings.python.pyrefly.displayTypeErrors = "force-on";}
+            else {config.settings.python.pyrefly.typeCheckingMode = "strict";}
+          );
       };
       # Handle formatting of python code blocks
       plugins.conform-nvim.settings.formatters.injected.options.lang_to_formatters.python = ["ruff_format"];
