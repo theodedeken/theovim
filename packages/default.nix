@@ -22,6 +22,9 @@
   coreModules =
     bareModules
     ++ [
+      self.nvixPlugins.plugins
+      self.nvixPlugins.packages
+
       # Git and version control
       self.nvixPlugins.git
 
@@ -42,6 +45,7 @@
       # Productivity
       self.nvixPlugins.autosession
       self.nvixPlugins.ai
+      self.nvixPlugins.terminal
 
       # Dashboard (Auto session works so rarely i see this.)
       self.nvixPlugins.dashboard
@@ -55,7 +59,7 @@ in {
   packages = rec {
     default = (pkgs.callPackage ./theovim.nix {core = self'.packages.core;}).override {extend = {};};
     theovim = default;
-    theovim-devcontainer = (pkgs.callPackage ./theovim-devcontainer.nix {inherit theovim;}).override {extend = {};};
+    theovim-devcontainer = (pkgs.callPackage ./theovim-devcontainer.nix {core = self'.packages.core;}).override {extend = {};};
     bare = mkNixvim bareModules;
     core = mkNixvim coreModules;
     full = mkNixvim fullModules;

@@ -22,6 +22,8 @@ in {
   };
 
   opts = {
+    title = true;
+    titlestring = "⚒  %{fnamemodify(getcwd(), ':t')} | %t%(\ %m%)";
     clipboard = "unnamedplus";
     cursorline = true;
     cursorlineopt = "number";

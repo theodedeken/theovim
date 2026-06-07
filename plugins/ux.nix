@@ -3,22 +3,6 @@
   config,
   ...
 }: {
-  extraPlugins = [
-    pkgs.vimPlugins.windows-nvim
-  ];
-  extraConfigLua =
-    # lua
-    ''
-      vim.o.winwidth = 10
-      vim.o.winminwidth = 10
-      vim.o.equalalways = false
-      require('windows').setup({
-        ignore = {
-          filetype = { "snacks_picker_list", "snacks_layout_box" },
-        },
-      })
-    '';
-
   plugins = {
     colorizer = {
       enable = true;

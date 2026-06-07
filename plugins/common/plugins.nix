@@ -5,22 +5,6 @@
 }: let
   inherit (config.nvix.mkKey) mkKeymap;
 in {
-  nixpkgs.overlays = [
-    (final: prev: {
-      vimPlugins =
-        prev.vimPlugins
-        // {
-          # FIXME: remove once vim coach is packaged in nix
-          vim-coach = pkgs.callPackage ../packages/vim-coach-package.nix {
-            inherit
-              (pkgs.vimUtils)
-              buildVimPlugin
-              ;
-          };
-        };
-    })
-  ];
-
   plugins = {
     vim-coach.enable = true;
     # Must have plugins to have a decent flow of work

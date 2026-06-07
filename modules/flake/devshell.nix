@@ -12,6 +12,7 @@
           extend = {
             theovim.lang.nix.enable = true;
             theovim.lang.markdown.enable = true;
+            theovim.lang.shell.enable = true;
           };
         })
       ];
