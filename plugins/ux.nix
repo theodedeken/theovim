@@ -1,9 +1,7 @@
 {
-  pkgs,
-  config,
-  ...
-}: {
   plugins = {
+    # Show screensaver with current directory
+    dir-saver.enable = true;
     colorizer = {
       enable = true;
       settings = {
