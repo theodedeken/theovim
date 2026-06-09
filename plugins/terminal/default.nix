@@ -12,7 +12,7 @@
       action = ":ToggleTerm direction=vertical name=main size=80<CR>";
       description = "Toggle terminal on the side";
     };
-    # Special gf/gF mapping which open the file under cursor in the window above
+    # Special gf/gF mapping which opens the file under cursor in the window above
     # Otherwise the terminal window would be closed
     "-gf" = {
       action = "mm<C-w>s<C-w>K<C-w>j:q<CR>`mgf";

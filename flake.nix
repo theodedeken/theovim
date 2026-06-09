@@ -1,14 +1,9 @@
 {
-  description = "Nikhil's NixOs / nix-darwin configuration";
+  description = "Theo's neovim configuration";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixvim.url = "github:nix-community/nixvim";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
-
     systems.url = "github:nix-systems/default";
   };
 
