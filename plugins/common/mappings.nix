@@ -100,7 +100,7 @@
         ''
       ) "Insert Date at cursor position")
 
-    (mkKeymap "n" "<leader>ft"
+    (mkKeymap "n" "<leader>bft"
       (
         mkRaw # lua
         
@@ -115,7 +115,7 @@
             end)
           end
         ''
-      ) "Set Filetype")
+      ) "Set filetype for buffer")
 
     (mkKeymap "n" "<leader>o"
       (

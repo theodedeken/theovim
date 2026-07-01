@@ -1,28 +1,37 @@
 {
   core,
+  bash,
   devcontainer,
-  writeShellScriptBin,
+  resholve,
   extend ? null,
   ...
 }: let
-  nvim =
+  nvim-bin =
     if isNull extend
     then core.extend {}
     else core.extend extend;
 in
-  writeShellScriptBin "theovim-devcontainer" ''
+  resholve.writeScriptBin "theovim-devcontainer" {
+    inputs = [devcontainer];
+    execer = [
+      "cannot:${devcontainer}/bin/devcontainer"
+    ];
+    interpreter = "${bash}/bin/bash";
+  }
+  # bash
+  ''
     set -e
 
-    remove_flag=""
+    remove_flag="--remove-existing-container=false"
     if [ "$2" = "--rebuild" ]; then
-        remove_flag="--remove-existing-container"
+      remove_flag="--remove-existing-container=true"
     fi
 
     # Start container with /nix mount
-    ${devcontainer}/bin/devcontainer up $remove_flag \
+    devcontainer up "$remove_flag" \
       --mount "type=bind,source=/nix,target=/nix" \
       --mount "type=bind,source=$HOME/.config,target=/home-config" \
-      --config $1 --workspace-folder .
+      --config "$1" --workspace-folder .
     # Start theovim
-    ${devcontainer}/bin/devcontainer exec --config $1 --workspace-folder . ${nvim}/bin/nvim
+    devcontainer exec --config "$1" --workspace-folder . "${nvim-bin}"/bin/nvim
   ''

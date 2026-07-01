@@ -25,7 +25,7 @@ in {
     (mkKeymap "n" "<leader>un" "<cmd>:lua Snacks.notifier.hide()<cr>" "Dismiss All Notifications")
 
     # Telescope replacement
-    (mkKeymap "n" "<leader>sP" "<cmd>:lua Snacks.picker()<cr>" "Pickers")
+    (mkKeymap "n" "<leader>fp" "<cmd>:lua Snacks.picker()<cr>" "Pickers")
     (mkKeymap "n" "<leader>st" "<cmd>:lua Snacks.picker.todo_comments({layout = 'ivy'})<cr>" "Todo")
     (
       mkKeymap "n" "<leader>sT"
@@ -61,7 +61,6 @@ in {
       ) "Undo")
 
     (mkKeymap "n" "<leader>f/" "<cmd>:lua Snacks.picker.grep({hidden = true})<cr>" "Grep")
-    (mkKeymap "n" "<leader>fp" "<cmd>:lua Snacks.picker.projects()<cr>" "Pickers")
     (mkKeymap "n" "<leader>f." "<cmd>:lua Snacks.picker.resume({ include = {'grep'} })<cr>" "Resume grep")
   ];
 }
